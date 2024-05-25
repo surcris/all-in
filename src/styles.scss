@@ -1,1 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+}
+
+@font-face {
+    font-family: 'Designer';
+    src: url('./assets/fonts/Designer.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+body{
+    font-family: "Designer", sans-serif;
+}
+
+html{
+    scroll-behavior: smooth;
+}
