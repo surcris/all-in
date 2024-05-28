@@ -6,7 +6,7 @@ import { HeaderComponent } from '../header/header.component';
   standalone: true,
   imports: [HeaderComponent],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+  styleUrls: ['./home.component.scss','./homeMobile.component.scss']
 })
 export class HomeComponent {
 
