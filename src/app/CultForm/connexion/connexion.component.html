@@ -1,0 +1,26 @@
+<form @submit.prevent="">
+    <div class="form-input" >
+        <input type="text" name="email"  class="form-control  my-2"  placeholder="Email" v-model="infoUser.email">
+        <input type="password" name="mdp" class="form-control  my-2"  placeholder="Mot de passe" v-model="infoUser.password">
+    </div>
+    <div class="form-check">
+        <input type="checkbox" name="" id="">
+        <label for="scales">Se souvenir de moi</label>
+    </div>
+    
+    <div class="form-submit">
+        <button  type="submit" class="btn btn-primary my-2">Valider</button>
+    </div>
+    <div class="form-line"></div>
+</form>
+<div class="log-api">
+    <div class="log-api-google"  >
+        <!-- <img src="../../assets/logo/Google__G__Logo.svg.png" alt=""> -->
+    </div>
+    <div class="log-api-facebook">
+        <!-- <img src="../../assets/logo/Facebook_logo_(square).png.webp" alt=""> -->
+    </div>
+    <div class="log-api-twitter">
+        <!-- <img src="../../assets/logo/Logo_of_Twitter,_Inc..svg.png" alt=""> -->
+    </div>
+</div>

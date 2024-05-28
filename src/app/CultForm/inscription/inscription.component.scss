@@ -1,0 +1,85 @@
+form{
+    width: 100%;
+    
+}
+.form-input{
+    display: flex;
+    flex-direction: column;
+    
+}
+.form-input input{
+    margin: 10px 0px;
+    padding: 10px 0px;
+    text-align: center;
+    background-color: rgba(4, 45, 50, 0.8);
+    border-radius: 5px;
+    border: none;
+    font-weight: 400;
+    font-size: 24px;
+    color: #fff;
+}
+
+.form-input input::placeholder{
+    font-family: 'Kodchasan', sans-serif;
+    opacity: 0.5;
+    color: white;
+    font-weight: 800;
+    font-size: 24px;
+}
+.form-input input[type="date"]{
+    font-family: 'Kodchasan', sans-serif;
+    color: white;
+    font-weight: 800;
+    font-size: 24px;
+}
+.form-input-div{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.form-input-div input{
+    width: 49%;
+    
+}
+
+.form-submit{
+    width: 100%;
+    padding: 10px 0px;
+    display: flex;
+    justify-content: center
+}
+.form-submit button{
+    cursor: pointer;
+    background: linear-gradient(90deg, #4D194D 35.91%, #000000 100%);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
+    width: 100%;
+    height: 40px;
+    color: white;
+    border: none;
+    font-family: 'Kodchasan', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.form-line{
+    border-bottom: #fff solid 1px;
+}
+.log-api{
+    font-family: 'Kodchasan', sans-serif;
+    padding: 10px 0px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+.log-api div{
+    margin: 0px 10px;
+    height: 40px;
+    width: 40px;
+    border-radius: 5px;
+}
+.log-api div img{
+    height: 100%;
+    width: 100%;
+}
