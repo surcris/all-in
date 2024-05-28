@@ -1,0 +1,105 @@
+.contact{
+    font-family: "Kodchasan", sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+form{
+    width: 80vw;
+    display: flex;
+    flex-direction: column;
+}
+
+.top-form{
+    width: 100%;
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fit,minmax(150px,1fr));
+}
+.left-form, .right-form{
+    
+    display: flex;
+    flex-direction: column;
+}
+.bot-form{
+    display: flex;
+    flex-direction: column;
+}
+label{
+    color: aliceblue;
+    display: flex;
+    font-size: 20px;
+    font-weight: 500;
+}
+input{
+    padding: 10px;
+    height: 50px;
+    background-color: #edf2f7;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+textarea{
+    background-color: #edf2f7;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    resize: none;
+}
+
+input, textarea{
+    font-size: 18px;
+}
+input:focus, textarea:focus{
+    outline: none;
+}
+.btn{
+    padding-top: 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    a{
+        color: aliceblue;
+        font-size: larger;
+        text-decoration: none;
+        font-weight: 900;
+    }
+}
+button{
+    background-color: brown;
+    padding: 20px;
+    width: 200px;
+    border: none;
+    font-size:18px;
+    font-weight: 600;
+    color: #edf2f7;
+}
+
+@media (max-width:500px) {
+    textarea{
+        height: 100px;
+    }
+    input{
+        height: 30px;
+    }
+    button{
+        background-color: brown;
+        padding: 5px;
+        width: 200px;
+        border: none;
+        font-size:18px;
+        font-weight: 600;
+        color: #edf2f7;
+    }
+    label{
+        display: flex;
+        font-size: 15px;
+        font-weight: 500;
+    }
+    input, textarea{
+        font-size: 14px;
+    }
+}

@@ -1,0 +1,66 @@
+<div class="section contact">
+
+    <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+        <div class="top-form">
+            <div class="left-form">
+                <label for="Societe">Nom de société</label>
+                <input type="text" name="Societe" id="">
+
+                <label for="nom">Nom <span style="color: brown;"> * </span></label>
+                <input type="text" name="nom" formControlName="nom" id="nom">
+                <div *ngIf="contactForm.controls['nom'].errors?.['required'] && contactForm.controls['nom'].touched"
+                    style="color: red;">
+                    Nom est requis
+                </div>
+
+
+                <label for="prenom">Prenom  <span style="color: brown;"> * </span></label>
+                <input type="text" name="prenom" id="" formControlName="prenom" required>
+                <div *ngIf="contactForm.controls['prenom'].errors?.['required'] && contactForm.controls['prenom'].touched"
+                    style="color: red;">
+                    Prenom est requis
+                </div>
+
+
+            </div>
+            <div class="right-form">
+                <label for="tel">Téléphone</label>
+                <input value type="tel" name="tel" id="" formControlName="tel" required>
+
+                <label for="email">Email  <span style="color: brown;"> * </span></label>
+                <input type="text" name="email" id="" formControlName="email" required>
+                <div *ngIf="contactForm.controls['email'].errors?.['required'] && contactForm.controls['email'].touched"
+                    style="color: red;">
+                    Email est requis
+                </div>
+
+                <label for="objet">Objet du message  <span style="color: brown;"> * </span></label>
+                <input type="text" name="objet" id="" formControlName="objet" required>
+                <div *ngIf="contactForm.controls['objet'].errors?.['required'] && contactForm.controls['objet'].touched"
+                    style="color: red;">
+                    Objet est requis
+                </div>
+
+
+            </div>
+        </div>
+        <div class="bot-form">
+            <label for="message">Votre message <span style="color: brown;"> * </span></label>
+            <textarea name="message" id="message" cols="30" rows="10" formControlName="message"></textarea>
+            <div *ngIf="contactForm.controls['message'].errors?.['required'] && contactForm.controls['message'].touched" style="color: red;">
+              Message est requis
+            </div>
+            <div *ngIf="contactForm.controls['message'].errors?.['minlength'] && contactForm.controls['message'].touched" style="color: red;">
+              6 caractères minimum
+            </div>
+          </div>
+
+        <div class="btn">
+            <button type="submit" [disabled]="contactForm.invalid">Envoyer votre message</button>
+            <br>
+            <a routerLink="/">Accueil</a>
+        </div>
+
+    </form>
+
+</div>
