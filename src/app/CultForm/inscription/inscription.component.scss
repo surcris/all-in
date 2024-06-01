@@ -1,7 +1,25 @@
-form{
-    width: 100%;
+.inscrip-Body{
+    font-family: 'Kodchasan';
     
+    background-color: #0B525B;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    h1{
+        font-weight: 900;
+        font-size: 35px;
+       
+    }
+    form{
+        min-width: 250px;
+        
+    }
 }
+
+
 .form-input{
     display: flex;
     flex-direction: column;
@@ -51,7 +69,8 @@ form{
 }
 .form-submit button{
     cursor: pointer;
-    background: linear-gradient(90deg, #4D194D 35.91%, #000000 100%);
+    background-color: #4D194D;
+    // background: linear-gradient(90deg, #4D194D 35.91%, #000000 100%);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 15px;
     width: 100%;

@@ -1,25 +1,29 @@
-<form >
-    <div class="form-input" >
-        <input type="text" name="pseudo"  class="form-control  my-2"  placeholder="Pseudo" v-model="infoUser.pseudo">
-        <input type="text" name="email"  class="form-control  my-2"  placeholder="Email" v-model="infoUser.email">
-        <input type="password" name="mdp" class="form-control  my-2"  placeholder="Mot de passe" v-model="infoUser.password">
-        <input type="password" name="cmdp" class="form-control  my-2"  placeholder="Mot de passe" v-model="infoUser.passWc">
-    </div>
-    
-    
-    <div class="form-submit">
-        <button  type="submit" class="btn btn-primary my-2">Valider</button>
-    </div>
-    <div class="form-line"></div>
-</form>
-<div class="log-api">
-    <div class="log-api-google"  >
-        <!-- <img src="../../assets/logo/Google__G__Logo.svg.png" alt=""> -->
-    </div>
-    <div class="log-api-facebook">
-        <!-- <img src="../../assets/logo/Facebook_logo_(square).png.webp" alt=""> -->
-    </div>
-    <div class="log-api-twitter">
-        <!-- <img src="../../assets/logo/Logo_of_Twitter,_Inc..svg.png" alt=""> -->
+<div class="inscrip-Body">
+    <app-header-cult-form></app-header-cult-form>
+    <h1>Incsription</h1>
+    <form  (ngSubmit)="onSubmit()">
+        <div class="form-input" >
+            <input type="text" name="pseudo"  class="form-control  my-2"  placeholder="Pseudo" v-model="infoUser.pseudo">
+            <input type="text" name="email"  class="form-control  my-2"  placeholder="Email" v-model="infoUser.email">
+            <input type="password" name="mdp" class="form-control  my-2"  placeholder="Mot de passe" v-model="infoUser.password">
+            <input type="password" name="cmdp" class="form-control  my-2"  placeholder="Mot de passe" v-model="infoUser.passWc">
+        </div>
+        
+        
+        <div class="form-submit">
+            <button  type="submit" class="btn btn-primary my-2">Valider</button>
+        </div>
+        <div class="form-line"></div>
+    </form>
+    <div class="log-api">
+        <div class="log-api-google"  >
+            <!-- <img src="../../assets/logo/Google__G__Logo.svg.png" alt=""> -->
+        </div>
+        <div class="log-api-facebook">
+            <!-- <img src="../../assets/logo/Facebook_logo_(square).png.webp" alt=""> -->
+        </div>
+        <div class="log-api-twitter">
+            <!-- <img src="../../assets/logo/Logo_of_Twitter,_Inc..svg.png" alt=""> -->
+        </div>
     </div>
 </div>
