@@ -143,6 +143,7 @@
     src: url('./assets/fonts/Kodchasan/Kodchasan-MediumItalic.ttf') format('truetype');
 }
 
+
 @font-face {
     font-family: 'Kodchasan';
     font-style: normal;
@@ -156,6 +157,21 @@
     font-weight: 600;
     src: url('./assets/fonts/Kodchasan/Kodchasan-SemiBoldItalic.ttf') format('truetype');
 }
+
+@font-face {
+    font-family: 'Kodchasan';
+    font-style: 'Bold';
+    font-weight: 700;
+    src: url('./assets/fonts/Kodchasan/Kodchasan-Bold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Kodchasan';
+    font-style: italic;
+    font-weight: 700;
+    src: url('./assets/fonts/Kodchasan/Kodchasan-BoldItalic.ttf') format('truetype');
+}
+
 
 
 

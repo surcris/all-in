@@ -1,7 +1,9 @@
 <div class="connexion-Body">
     <app-header-cult-form></app-header-cult-form>
-    <h1>Connexion</h1>
+    <div><h1 class="titre">Connexion </h1></div>
+    
     <form (ngSubmit)="onSubmit()">
+        
         <div class="form-input" >
             <input type="text" name="email"  class="form-control  my-2"  placeholder="Email" >
             <input type="password" name="mdp" class="form-control  my-2"  placeholder="Mot de passe" >

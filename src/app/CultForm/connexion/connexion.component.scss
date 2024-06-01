@@ -1,6 +1,6 @@
 
 .connexion-Body{
-    font-family: 'Kodchasan';
+    
     
     background-color: #0B525B;
     height: 100vh;
@@ -8,12 +8,18 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    font-family: 'Kodchasan';
 
-    h1{
-        font-weight: 900;
-        font-size: 35px;
-       
-    }
+    .titre{
+        
+        font-style: normal;
+        font-weight: 700;
+        font-size: 48px;
+        text-align: center;
+        margin-bottom: 2px;
+        color: white;
+      }
+   
     form{
         min-width: 250px;
     }
