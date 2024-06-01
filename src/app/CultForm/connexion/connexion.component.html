@@ -2,11 +2,24 @@
     <app-header-cult-form></app-header-cult-form>
     <div><h1 class="titre">Connexion </h1></div>
     
-    <form (ngSubmit)="onSubmit()">
+    <form [formGroup]="authCoForm" (ngSubmit)="onSubmit()">
         
         <div class="form-input" >
-            <input type="text" name="email"  class="form-control  my-2"  placeholder="Email" >
-            <input type="password" name="mdp" class="form-control  my-2"  placeholder="Mot de passe" >
+            <input id="email" type="email" formControlName="email" name="email"  class="form-control  my-2"  placeholder="Email" >
+            
+            <div class="err" >
+                <small *ngIf="authCoForm.controls['email'].errors?.['required'] && formSubmitted ">Email requis.</small>
+                <small *ngIf="formSubmitted && authCoForm.controls['email'].hasError('email')">
+                    Adresse email invalide.
+                  </small>
+              </div>
+            <input id="password" formControlName="password" type="password" name="mdp" class="form-control  my-2"  placeholder="Mot de passe" >
+            <div class="err" >
+                <small *ngIf="formSubmitted && authCoForm.controls['password'].invalid">
+                    Mot de passe est requis.
+                  </small>
+            </div>
+            
         </div>
         <!-- <div class="form-check">
             <input type="checkbox" name="" id="">
@@ -14,10 +27,15 @@
         </div> -->
         
         <div class="form-submit">
-            <button  type="submit" class="btn btn-primary my-2">Valider</button>
+            <button  type="submit"  class="btn btn-primary my-2">Valider</button>
         </div>
+        <!-- <div class="err">
+            <p *ngIf="messageError !== '' ">{{ messageError }}</p>
+        </div> -->
+        
         <div class="form-line"></div>
     </form>
+    
     <div class="log-api">
         <div class="log-api-google"  >
             <!-- <img src="../../assets/logo/Google__G__Logo.svg.png" alt=""> -->
