@@ -1,19 +1,35 @@
 <div class="inscrip-Body">
     <app-header-cult-form></app-header-cult-form>
     <h1>Incsription</h1>
-    <form  (ngSubmit)="onSubmit()">
+    <form [formGroup]="authInsForm" (ngSubmit)="onSubmit()">
         <div class="form-input" >
-            <input type="text" name="pseudo"  class="form-control  my-2"  placeholder="Pseudo" v-model="infoUser.pseudo">
-            <input type="text" name="email"  class="form-control  my-2"  placeholder="Email" v-model="infoUser.email">
-            <input type="password" name="mdp" class="form-control  my-2"  placeholder="Mot de passe" v-model="infoUser.password">
-            <input type="password" name="cmdp" class="form-control  my-2"  placeholder="Mot de passe" v-model="infoUser.passWc">
+            <input type="text" formControlName="pseudo" name="pseudo"  class="form-control  my-2"  placeholder="Pseudo" v-model="infoUser.pseudo">
+            <small *ngIf="formSubmitted && authInsForm.controls['pseudo'].errors?.['required'] ">Pseudo requis.</small>
+
+            <input type="text" formControlName="email" name="email"  class="form-control  my-2"  placeholder="Email" v-model="infoUser.email">
+            <small *ngIf="formSubmitted && authInsForm.controls['email'].errors?.['required']  ">Email requis.</small>
+            <small *ngIf="formSubmitted && authInsForm.controls['email'].hasError('email')">
+                Adresse email invalide.
+              </small>
+
+            <input type="password" formControlName="mdp" name="mdp" class="form-control  my-2"  placeholder="Mot de passe" v-model="infoUser.password">
+            <small *ngIf="formSubmitted && authInsForm.controls['mdp'].errors?.['required']">Mot de passe requis.</small>
+
+            <input type="password" formControlName="cmdp" name="cmdp" class="form-control  my-2"  placeholder="Mot de passe" v-model="infoUser.passWc">
+            <small *ngIf="formSubmitted && authInsForm.controls['cmdp'].errors?.['required']">Mot de passe requis.</small>
         </div>
         
         
         <div class="form-submit">
             <button  type="submit" class="btn btn-primary my-2">Valider</button>
         </div>
+        <p *ngIf="messageError !== '' ">{{ messageError }}</p>
+        <div class="botco">
+            <p>Vous avez déjà un compte ? </p>
+            <a [routerLink]="['/connexion']">Connexion</a>
+        </div>
         <div class="form-line"></div>
+       
     </form>
     <div class="log-api">
         <div class="log-api-google"  >

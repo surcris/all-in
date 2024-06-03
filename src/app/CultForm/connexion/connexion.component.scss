@@ -14,7 +14,7 @@
         
         font-style: normal;
         font-weight: 700;
-        font-size: 48px;
+        font-size: 40px;
         text-align: center;
         margin-bottom: 2px;
         color: white;
@@ -22,6 +22,49 @@
    
     form{
         min-width: 250px;
+        
+        .err{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .botins{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            p{
+                font-size: 20px;
+                color: #fff;
+            }
+            a{
+                font-weight: 500;
+                font-size: 24px;
+                color:#4D194D;
+                text-decoration: none;
+                // transition: all 0.8s;
+            }
+            a:hover{
+                
+                text-decoration:underline;
+            }
+        }
+        .botrez{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            a{
+                font-size: 20px;
+                color: #fff;
+                text-decoration: none;
+                // transition: all 0.8s;
+            }
+            a:hover{
+                
+                text-decoration:underline;
+            }
+        }
     }
 }
 
@@ -45,8 +88,8 @@
     font-family: 'Kodchasan', sans-serif;
     opacity: 0.5;
     color: white;
-    font-weight: 800;
-    font-size: 24px;
+    font-weight: 700;
+    font-size: 20px;
 }
 .form-check{
     font-family: 'Kodchasan', sans-serif;
