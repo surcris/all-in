@@ -24,7 +24,12 @@
             <button  type="submit" class="btn btn-primary my-2">Valider</button>
         </div>
         <p *ngIf="messageError !== '' ">{{ messageError }}</p>
+        <div class="botco">
+            <p>Vous avez déjà un compte ? </p>
+            <a [routerLink]="['/connexion']">Connexion</a>
+        </div>
         <div class="form-line"></div>
+       
     </form>
     <div class="log-api">
         <div class="log-api-google"  >

@@ -9,6 +9,10 @@ header{
     justify-content: space-between;
     align-items: center;
     padding: 0 50px;
+    font-family: 'Kodchasan';
+    .header-mobile{
+        display: none;
+    }
     .header-nav{
         display: flex;
         
@@ -27,3 +31,16 @@ header{
     }
 }
 
+@media screen and (max-width: 500px){
+
+    header{
+        padding: 0 ;
+        .header-nav{
+            display: none;
+        }
+        .header-mobile{
+            display: flex;
+        }
+    }
+    
+}

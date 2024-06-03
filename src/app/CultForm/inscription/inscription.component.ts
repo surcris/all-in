@@ -1,14 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { HeaderCultFormComponent } from '../header-cult-form/header-cult-form.component';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators  } from '@angular/forms';
+import { Router, ActivatedRoute, ParamMap, RouterLink } from '@angular/router';
 import { NgIf } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
+import * as CryptoJS from 'crypto-js'
+
 
 @Component({
   selector: 'app-inscription',
   standalone: true,
-  imports: [ReactiveFormsModule, HeaderCultFormComponent, NgIf],
+  imports: [RouterLink,ReactiveFormsModule, HeaderCultFormComponent, NgIf],
   templateUrl: './inscription.component.html',
   styleUrl: './inscription.component.scss'
 })
@@ -17,7 +20,7 @@ export class InscriptionComponent implements OnInit{
   authInsForm:FormGroup;
   formSubmitted: boolean = false;
   messageError:string = "";
-  constructor(private formBuilder: FormBuilder,private http: HttpClient){
+  constructor(private formBuilder: FormBuilder,private http: HttpClient,private router: Router){
     this.authInsForm = this.formBuilder.group({
       pseudo: ['' , Validators.required],
       email: ['' , [Validators.required, Validators.email]],
@@ -37,16 +40,16 @@ export class InscriptionComponent implements OnInit{
         this.messageError = "les mots de passe doivent être identique"
       }else{
         this.messageError = "";
-        
+
         const formData = {
-          pseudo: this.authInsForm.value.pseudo,
-          email: this.authInsForm.value.email,
-          password: this.authInsForm.value.mdp
+          pseudo: CryptoJS.AES.encrypt(this.authInsForm.value.pseudo,environment.akey).toString() ,
+          email: CryptoJS.AES.encrypt(this.authInsForm.value.email,environment.akey).toString() ,
+          password: CryptoJS.AES.encrypt(this.authInsForm.value.mdp,environment.akey).toString() 
         };
 
-        // this.http.put(environment.apiUrl+"/api/user/addUserA", formData).subscribe(
+        // this.http.put(environment.apiUrltest+"auth/resetmdp", {email:formData.email}).subscribe(
         //   (response: any) => {
-        //     // console.log('Form submitted successfully', response);
+        //     console.log('Form Reset', response);
             
             
             
@@ -56,7 +59,20 @@ export class InscriptionComponent implements OnInit{
         //   }
         // );
 
-        console.log("CARRE")
+        this.http.put(environment.apiUrltest+"/auth/inscripUser", formData).subscribe(
+          (response: any) => {
+            console.log('Form submitted successfully', response);
+            
+            this.router.navigate(['/HomeCult']);
+            
+          },
+          error => {
+            console.error('Error submitting form', error);
+            this.messageError = error.error.message
+          }
+        );
+
+        
       }
     }
   }

@@ -29,9 +29,16 @@
         <div class="form-submit">
             <button  type="submit"  class="btn btn-primary my-2">Valider</button>
         </div>
-        <!-- <div class="err">
+        <div class="err">
             <p *ngIf="messageError !== '' ">{{ messageError }}</p>
-        </div> -->
+        </div>
+        <div class="botins">
+            <p>Créer un compte ? </p>
+            <a [routerLink]="['/inscription']">Inscription</a>
+        </div>
+        <div class="botrez">
+            <a [routerLink]="['/resetPassword']">Impossible de se connecter ?</a>
+        </div>
         
         <div class="form-line"></div>
     </form>

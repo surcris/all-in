@@ -30,6 +30,41 @@
             align-items: center;
         }
 
+        .botins{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            p{
+                font-size: 20px;
+                color: #fff;
+            }
+            a{
+                font-weight: 500;
+                font-size: 24px;
+                color:#4D194D;
+                text-decoration: none;
+                // transition: all 0.8s;
+            }
+            a:hover{
+                
+                text-decoration:underline;
+            }
+        }
+        .botrez{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            a{
+                font-size: 20px;
+                color: #fff;
+                text-decoration: none;
+                // transition: all 0.8s;
+            }
+            a:hover{
+                
+                text-decoration:underline;
+            }
+        }
     }
 }
 
