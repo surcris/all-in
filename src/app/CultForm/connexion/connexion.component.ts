@@ -6,7 +6,7 @@ import { NgIf } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import * as CryptoJS from 'crypto-js'
-import { environment } from '../../../environments/environment';
+import { environment } from '../../../environments/environment.ts';
 
 @Component({
   selector: 'app-connexion',
