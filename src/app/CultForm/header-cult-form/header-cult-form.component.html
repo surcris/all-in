@@ -17,6 +17,23 @@
     </div>
 
     <div class="header-mobile">
-
+        <div id="mySidenav" class="sidenav">
+            <a id="closeBtn" (click)="closeNav()" class="close">×</a>
+            <ul>
+              <li><a routerLink="/HomeCult" routerLinkActive="active">Accueil</a></li>
+              <li><a href="#" routerLinkActive="active">CV</a></li>
+              <li><a >Demo</a></li>
+              <li><a routerLink="/connexion" routerLinkActive="active">Connexion</a></li>
+              <li><a [routerLink]="['/inscription']" routerLinkActive="active">Inscription</a></li>
+            </ul>
+          </div>
+          
+          <a (click)="openNav()" id="openBtn">
+            <span class="burger-icon">
+              <span></span>
+              <span></span>
+              <span></span>
+            </span>
+          </a>
     </div>
 </header>

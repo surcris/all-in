@@ -35,6 +35,7 @@
         h1, h2 ,p,nav{
             margin-top: 10px;
         }
+        
         li{
             margin: 20px 0;
             list-style: none;
@@ -74,6 +75,9 @@
         }
     }
 
+    .head-titre{
+        display: none;
+    }
     .homeContent{
         
         #homeContent-presentation{
@@ -250,3 +254,4 @@
     }
 
 }
+

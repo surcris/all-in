@@ -11,5 +11,17 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 })
 export class HeaderCultFormComponent {
 
- 
+  openNav() {
+    const sidenav = document.getElementById("mySidenav");
+    if (sidenav) {
+      sidenav.classList.add("active");
+    }
+  }
+
+  closeNav() {
+    const sidenav = document.getElementById("mySidenav");
+    if (sidenav) {
+      sidenav.classList.remove("active");
+    }
+  }
 }
