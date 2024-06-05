@@ -2,7 +2,14 @@ const fs = require('fs');
 const path = require('path');
 
 const targetPath = './src/environments/environment.ts';
-const targetProdPath = path.join(__dirname, 'src/environments/environment.prod.ts');
+const targetProdPath = './src/environments/environment.prod.ts';
+
+const envProdConfigFile  = `export const environment = {
+  production: ${process.env.NODE_ENV === 'production'},
+  apiUrl: '${process.env.API_URL}',
+  akey: '${process.env.AKEY}'
+};
+`;
 
 const envConfigFile = `export const environment = {
   production: ${process.env.NODE_ENV === 'production'},
@@ -10,8 +17,15 @@ const envConfigFile = `export const environment = {
   akey: '${process.env.AKEY}'
 };
 `;
+fs.writeFile(targetProdPath, envProdConfigFile, 'utf8', (err) => {
+    if (err) {
+      console.log('Error writing environment file', err);
+    } else {
+      console.log('Environment file written successfully');
+    }
+  });
 
-fs.writeFile(targetProdPath, envConfigFile, 'utf8', (err) => {
+  fs.writeFile(targetPath, envConfigFile, 'utf8', (err) => {
     if (err) {
       console.log('Error writing environment file', err);
     } else {
