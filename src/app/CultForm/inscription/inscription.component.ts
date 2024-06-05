@@ -4,7 +4,7 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators  }
 import { Router, ActivatedRoute, ParamMap, RouterLink } from '@angular/router';
 import { NgIf } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-// import { environment } from '../../../environments/environment';
+import { environment } from '../../../environments/environment';
 import * as CryptoJS from 'crypto-js'
 
 
@@ -42,9 +42,9 @@ export class InscriptionComponent implements OnInit{
         this.messageError = "";
 
         const formData = {
-          pseudo: CryptoJS.AES.encrypt(this.authInsForm.value.pseudo,process.env.akey).toString() ,
-          email: CryptoJS.AES.encrypt(this.authInsForm.value.email,process.env.akey).toString() ,
-          password: CryptoJS.AES.encrypt(this.authInsForm.value.mdp,process.env.akey).toString() 
+          pseudo: CryptoJS.AES.encrypt(this.authInsForm.value.pseudo,environment.akey).toString() ,
+          email: CryptoJS.AES.encrypt(this.authInsForm.value.email,environment.akey).toString() ,
+          password: CryptoJS.AES.encrypt(this.authInsForm.value.mdp,environment.akey).toString() 
         };
 
         // this.http.put(environment.apiUrltest+"auth/resetmdp", {email:formData.email}).subscribe(
@@ -59,7 +59,7 @@ export class InscriptionComponent implements OnInit{
         //   }
         // );
 
-        this.http.put(`${process.env.apiUrl}/auth/inscripUser`, formData).subscribe(
+        this.http.put(`${environment.apiUrl}/auth/inscripUser`, formData).subscribe(
           (response: any) => {
             console.log('Form submitted successfully', response);
             
