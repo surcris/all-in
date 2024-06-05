@@ -68,9 +68,34 @@
                 color: aliceblue;
             }
         }
-       
+        .btn-cv{
+            background-color: aliceblue;
+            margin-top: 10px;
+            height: 30px;
+            width: 100px;
+            border-radius: 50px;
+            border: none;
+            font-size: 20px;
+            font-weight: 700;
+            font-family: "Kodchasan", sans-serif;
+            transition: all 0.3s;
+            
+            // a{
+            //     color: black;
+            // }
+            i{
+                font-size: 20px;
+                // color: black;
+            }
+            a:hover{
+                background-color: rgba(144, 3, 226, 0.24);
+                color: aquamarine;
+    
+            }
+        }
+        
         p{
-            width: 50%;
+            width: 100%;
             
         }
     }
