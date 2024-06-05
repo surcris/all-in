@@ -3,7 +3,7 @@ import { HeaderCultFormComponent } from '../header-cult-form/header-cult-form.co
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators  } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { NgIf } from '@angular/common';
-import { environment } from '../../../environments/environment';
+// import { environment } from '../../../environments/environment';
 @Component({
   selector: 'app-reset-password',
   standalone: true,
@@ -27,7 +27,7 @@ export class ResetPasswordComponent {
     this.errorMessage = '';
     this.successMessage = '';
 
-    this.http.put(environment.apiUrltest+"/auth/resetmdp",{email: this.authResForm.value.email}).subscribe(
+    this.http.put(process.env.apiUrl+"/auth/resetmdp",{email: this.authResForm.value.email}).subscribe(
       (response: any) => {
         console.log('Form submitted successfully', response);
         this.successMessage = 'Un e-mail de réinitialisation de mot de passe a été envoyé à votre adresse e-mail.';

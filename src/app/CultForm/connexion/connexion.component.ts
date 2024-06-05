@@ -6,7 +6,7 @@ import { NgIf } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import * as CryptoJS from 'crypto-js'
-import { environment } from '../../../environments/environment';
+// import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-connexion',
@@ -48,13 +48,13 @@ export class ConnexionComponent implements OnInit {
     if(!this.authCoForm.invalid){
      
       const formData = {
-        email: CryptoJS.AES.encrypt(this.authCoForm.value.email,environment.akey).toString() ,
-        password: CryptoJS.AES.encrypt(this.authCoForm.value.password,environment.akey).toString()
+        email: CryptoJS.AES.encrypt(this.authCoForm.value.email,process.env.akey).toString() ,
+        password: CryptoJS.AES.encrypt(this.authCoForm.value.password,process.env.akey).toString()
       };
       
       // console.log(CryptoJS.AES.encrypt(this.authCoForm.value.password,environment.akey).toString() )
       // console.log(formData)
-      this.http.put(`${environment.apiUrl}/auth/connexionUser`, formData).subscribe(
+      this.http.put(`${process.env.apiUrl}/auth/connexionUser`, formData).subscribe(
         (response: any) => {
           console.log('Form submitted successfully', response);
           
