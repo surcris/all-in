@@ -59,7 +59,7 @@ export class InscriptionComponent implements OnInit{
         //   }
         // );
 
-        this.http.put(environment.apiUrltest+"/auth/inscripUser", formData).subscribe(
+        this.http.put(`${environment.apiUrl}/auth/inscripUser`, formData).subscribe(
           (response: any) => {
             console.log('Form submitted successfully', response);
             

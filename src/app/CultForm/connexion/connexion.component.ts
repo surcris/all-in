@@ -32,10 +32,8 @@ export class ConnexionComponent implements OnInit {
   ngOnInit() {
     
   }
-  m:string = "";
-  test(){
-    console.log(environment.akey)
-  }
+
+  
   decrypt(ciphertext:string,key:string) {
     const bytes = CryptoJS.AES.decrypt(ciphertext, key);
     return bytes.toString(CryptoJS.enc.Utf8);
@@ -56,7 +54,7 @@ export class ConnexionComponent implements OnInit {
       
       // console.log(CryptoJS.AES.encrypt(this.authCoForm.value.password,environment.akey).toString() )
       // console.log(formData)
-      this.http.put(environment.apiUrltest+"/auth/connexionUser", formData).subscribe(
+      this.http.put(`${environment.apiUrl}/auth/connexionUser`, formData).subscribe(
         (response: any) => {
           console.log('Form submitted successfully', response);
           
