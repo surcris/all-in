@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit  } from '@angular/core';
 import { HeaderCultFormComponent } from '../header-cult-form/header-cult-form.component';
-
+import { ApiService } from '../../api.service';
+ApiService
 @Component({
   selector: 'app-home-cult-form',
   standalone: true,
@@ -10,4 +11,23 @@ import { HeaderCultFormComponent } from '../header-cult-form/header-cult-form.co
 })
 export class HomeCultFormComponent {
 
+  message: string | undefined;
+  
+  constructor(private apiService: ApiService) { }
+  ngOnInit(): void {
+    
+
+    
+  }
+
+  callApi(){
+    this.apiService.getMessage().subscribe(
+      (data: any) => {
+        this.message = data.message;
+      },
+      (error) => {
+        console.error('Error fetching message:', error);
+      }
+    );
+  }
 }
