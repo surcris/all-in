@@ -2,11 +2,11 @@
   
   command = "node replace-env.js && ng build --configuration production"
 
-[redirects]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+[[redirects]]
+    to = "/.netlify/functions/server/:splat"
+    from = "/*"
+    status = 200
 
 
 [functions]
-  directory = "netlify/functions"
+  directory = "netlify/functions-internal"

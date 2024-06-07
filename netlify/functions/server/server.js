@@ -10,5 +10,5 @@ router.get('/api', (req, res) => {
   res.json({ message: 'Hello from Serverless Function!' });
 });
 
-app.use("/.netlify/functions/server/",router)
+app.use("/",router)
 module.exports.handler = serverless(app);
