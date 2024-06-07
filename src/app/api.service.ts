@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class ApiService {
 
-  private apiUrl = 'http://localhost:3000/api';
+  private apiUrl = 'https://testingangularnode--melodious-alpaca-20b427.netlify.app/.netlify/functions/server/api';
 
   constructor(private http: HttpClient) { }
 
