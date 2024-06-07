@@ -21,13 +21,8 @@ export class HomeCultFormComponent {
   }
 
   callApi(){
-    this.apiService.getMessage().subscribe(
-      (data: any) => {
-        this.message = data.message;
-      },
-      (error) => {
-        console.error('Error fetching message:', error);
-      }
-    );
-  }
+      this.apiService.getMessage().subscribe((data: any) => {
+        this.message = data;
+      });
+    }
 }

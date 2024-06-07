@@ -7,11 +7,11 @@ import { Observable } from 'rxjs';
 })
 export class ApiService {
 
-  private apiUrl = 'https://testingangularnode--melodious-alpaca-20b427.netlify.app/api';
+  private apiUrl = 'http://localhost:4200/.netlify/functions/server/';
 
   constructor(private http: HttpClient) { }
 
   getMessage(): Observable<any> {
-    return this.http.get(this.apiUrl);
+    return this.http.get(this.apiUrl+"api",{responseType: 'json'});
   }
 }

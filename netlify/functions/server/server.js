@@ -7,8 +7,9 @@ const router = express.Router()
 
 // Définissez vos routes
 router.get('/api', (req, res) => {
-  res.json({ message: 'Hello from Serverless Function!' });
+  res.send({ "path" : "message" });
+  
 });
 
-app.use("/",router)
+app.use("/.netlify/functions/server/",router)
 module.exports.handler = serverless(app);
