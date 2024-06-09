@@ -22,6 +22,7 @@ export class HomeCultFormComponent {
 
   callApi(){
       this.apiService.getMessage().subscribe((data: any) => {
+        console.log(data)
         this.message = data;
       });
     }

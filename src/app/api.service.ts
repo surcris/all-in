@@ -7,11 +7,11 @@ import { Observable } from 'rxjs';
 })
 export class ApiService {
 
-  private apiUrl = 'http://localhost:4200/.netlify/functions/server/';
+  private apiUrl = 'http://localhost:4200/';
 
   constructor(private http: HttpClient) { }
 
   getMessage(): Observable<any> {
-    return this.http.get(this.apiUrl+"api",{responseType: 'json'});
+    return this.http.get(this.apiUrl+"api/hello");
   }
 }
