@@ -6,7 +6,7 @@ import { ContactComponent } from './contact/contact.component';
 import { InscriptionComponent } from './CultForm/inscription/inscription.component';
 import { ConnexionComponent } from './CultForm/connexion/connexion.component';
 import { ResetPasswordComponent } from './CultForm/reset-password/reset-password.component';
-
+import { AuthGuard } from './auth.guard';
 
 
 

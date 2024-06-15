@@ -7,7 +7,9 @@ import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import * as CryptoJS from 'crypto-js'
 import { environment } from '../../../environments/environment';
-
+import { AuthService } from '../../services/auth.service';
+import { CryptService } from '../../services/crypt.service';
+AuthService
 @Component({
   selector: 'app-connexion',
   standalone: true,
@@ -21,7 +23,7 @@ export class ConnexionComponent implements OnInit {
   messageError:String;
   formSubmitted: boolean = false;
 
-  constructor(private formBuilder: FormBuilder,private http: HttpClient,private router: Router){
+  constructor(private formBuilder: FormBuilder,private http: HttpClient,private router: Router,private authService: AuthService,private crypt: CryptService){
     this.authCoForm = this.formBuilder.group({
       email: ['' , [Validators.required, Validators.email]],
       password: ['' , Validators.required]
@@ -48,25 +50,29 @@ export class ConnexionComponent implements OnInit {
     if(!this.authCoForm.invalid){
      
       const formData = {
-        email: CryptoJS.AES.encrypt(this.authCoForm.value.email,environment.akey).toString() ,
-        password: CryptoJS.AES.encrypt(this.authCoForm.value.password,environment.akey).toString()
+        email: this.crypt.encrypt(this.authCoForm.value.email),
+        password: this.crypt.encrypt(this.authCoForm.value.mdp)
       };
-      
-      // console.log(CryptoJS.AES.encrypt(this.authCoForm.value.password,environment.akey).toString() )
-      // console.log(formData)
-      this.http.put(`${environment.apiUrl}/auth/connexionUser`, formData).subscribe(
-        (response: any) => {
-          console.log('Form submitted successfully', response);
-          
-          // this.m = response.message;
-          // localStorage.setItem('akey', response.message);
-          this.router.navigate(['/HomeCult']);
-        },
-        error => {
-          console.error('Error submitting form', error);
-          this.messageError = error.error.message
-        }
-      );
+
+      this.authService.connexion(formData.email, formData.password)
+        .then(res => {
+          if (res === true) {
+            this.router.navigate(['/HomeCult']);
+          }else{
+            if (res == "auth/missing-password") {
+              this.messageError = "Erreur d'identification";
+            }else{
+              //console.log(res)
+              this.messageError = res;
+            }
+            
+          }
+        })
+        .catch(err => {
+          console.error(err);
+          this.messageError = "Une erreur est survenue lors de la connexion";
+        })
+
       
     }
   }

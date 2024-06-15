@@ -5,8 +5,9 @@ import { Router, ActivatedRoute, ParamMap, RouterLink } from '@angular/router';
 import { NgIf } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import * as CryptoJS from 'crypto-js'
 
+import { AuthService } from '../../services/auth.service';
+import { CryptService } from '../../services/crypt.service';
 
 @Component({
   selector: 'app-inscription',
@@ -20,7 +21,7 @@ export class InscriptionComponent implements OnInit{
   authInsForm:FormGroup;
   formSubmitted: boolean = false;
   messageError:string = "";
-  constructor(private formBuilder: FormBuilder,private http: HttpClient,private router: Router){
+  constructor(private formBuilder: FormBuilder,private http: HttpClient,private router: Router,private authService: AuthService,private crypt: CryptService){
     this.authInsForm = this.formBuilder.group({
       pseudo: ['' , Validators.required],
       email: ['' , [Validators.required, Validators.email]],
@@ -42,36 +43,24 @@ export class InscriptionComponent implements OnInit{
         this.messageError = "";
 
         const formData = {
-          pseudo: CryptoJS.AES.encrypt(this.authInsForm.value.pseudo,environment.akey).toString() ,
-          email: CryptoJS.AES.encrypt(this.authInsForm.value.email,environment.akey).toString() ,
-          password: CryptoJS.AES.encrypt(this.authInsForm.value.mdp,environment.akey).toString() 
+          pseudo: this.crypt.encrypt(this.authInsForm.value.pseudo),
+          email: this.crypt.encrypt(this.authInsForm.value.email),
+          password: this.crypt.encrypt(this.authInsForm.value.mdp)
         };
 
-        // this.http.put(environment.apiUrltest+"auth/resetmdp", {email:formData.email}).subscribe(
-        //   (response: any) => {
-        //     console.log('Form Reset', response);
-            
-            
-            
-        //   },
-        //   error => {
-        //     console.error('Error submitting form', error);
-        //   }
-        // );
-
-        this.http.put(`${environment.apiUrl}/auth/inscripUser`, formData).subscribe(
-          (response: any) => {
-            console.log('Form submitted successfully', response);
-            
-            this.router.navigate(['/HomeCult']);
-            
-          },
-          error => {
-            console.error('Error submitting form', error);
-            this.messageError = error.error.message
-          }
-        );
-
+        this.authService.inscription(formData.email, formData.password)
+          .then(res => {
+            if (res === true) {
+              this.router.navigate(['/HomeCult']);
+            }else{
+              this.messageError = res;
+            }
+          })
+          .catch(err => {
+            console.error(err)
+            this.messageError = "Une erreur est survenue lors de la connexion";
+          })
+          
         
       }
     }
