@@ -4,6 +4,9 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators  }
 import { HttpClient } from '@angular/common/http';
 import { NgIf } from '@angular/common';
 import { environment } from '../../../environments/environment';
+import { AuthService } from '../../services/auth.service';
+import { CryptService } from '../../services/crypt.service';
+
 @Component({
   selector: 'app-reset-password',
   standalone: true,
@@ -16,7 +19,7 @@ export class ResetPasswordComponent {
   successMessage: string = '';
   authResForm: FormGroup ;
   formSubmitted: boolean = false;
-  constructor(private formBuilder: FormBuilder,private http: HttpClient){
+  constructor(private formBuilder: FormBuilder,private http: HttpClient,private auth: AuthService, private crypt: CryptService){
     this.authResForm = this.formBuilder.group({
       email: ['' , [Validators.required, Validators.email]],
       
@@ -26,20 +29,16 @@ export class ResetPasswordComponent {
   resetPassword() {
     this.errorMessage = '';
     this.successMessage = '';
+    
 
-    this.http.put(environment.apiUrl+"/auth/resetmdp",{email: this.authResForm.value.email}).subscribe(
-      (response: any) => {
-        console.log('Form submitted successfully', response);
-        this.successMessage = 'Un e-mail de réinitialisation de mot de passe a été envoyé à votre adresse e-mail.';
-        // this.m = response.message;
-        // localStorage.setItem('akey', response.message);
-        // this.router.navigate(['/HomeCult']);
-      },
-      error => {
-        // console.error('Error submitting form', error);
-        this.errorMessage = error.error.message
-      }
-    );
+    this.auth.resetPassword(this.crypt.encrypt(this.authResForm.value.email))
+      .then((res) => {
+        this.successMessage = res;
+        console.log(res)
+      })
+      .catch((err) => {
+        this.errorMessage = err;
+      })
     
   }
 }

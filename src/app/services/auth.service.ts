@@ -53,15 +53,10 @@ export class AuthService {
       const isEmailAvailable = await this.isSignIn(l_demail);
 
       if (!isEmailAvailable) {
-        console.log("Création de l'utilisateur en cours");
-        createUserWithEmailAndPassword(this.auth, l_demail, l_dpassword)
-          .then((res) => { console.log(res); return true; })
-          .catch((error: AuthError) => {
-
-            console.error(error.code);
-            return error.code;
-          });
-
+        // console.log("Création de l'utilisateur en cours");
+        const res = await createUserWithEmailAndPassword(this.auth, l_demail, l_dpassword);
+        // console.log(res);
+        return true;
       } else {
         console.log("Utilisateur existant");
         return "Utilisateur existant" ;
@@ -88,23 +83,23 @@ export class AuthService {
       const l_dpassword = this.crypt.decrypt(password)
      
       const isEmailAvailable = await this.isSignIn(l_demail);
-      console.log(isEmailAvailable)
+      
       if (isEmailAvailable) {
         // console.log("Utilisateur existant");
         const res = await signInWithEmailAndPassword(this.auth, l_demail, l_dpassword);
-        console.log(res);
+        // console.log(res);
         return true;
       }else {
-        console.log("Utilisateur non existant");
+        // console.log("Utilisateur non existant");
         return "Utilisateur non existant";
       }
       
     } catch (err: unknown) {
       if (err instanceof FirebaseError) {
-        console.error('Erreur lors de la connexion:', err.code);
+        // console.error('Erreur lors de la connexion:', err.code);
         return err.code;
       } else {
-        console.error('Erreur inconnue lors de la connexion:', err);
+        // console.error('Erreur inconnue lors de la connexion:', err);
         return "Erreur inconnue lors de la connexion";
       }
       // return { message: err };
@@ -124,16 +119,17 @@ export class AuthService {
       const isEmailAvailable = await this.isSignIn(l_demail);
 
       if (isEmailAvailable) {
-        sendPasswordResetEmail(this.auth, l_demail)
-          .then((res) => {console.log(res); return { message: "Connexion réussi" }; })
-          .catch((error: AuthError) => {
-
-            console.error(error.code);
-            return { message: error.code };
-          });
+        const res = await sendPasswordResetEmail(this.auth, l_demail)
+        
+        return "Un e-mail de réinitialisation de mot de passe a été envoyé à votre adresse e-mail." ;
+        
+      }else{
+        // console.log("Utilisateur non existant");
+        return "Utilisateur non existant";
       }
     } catch (err: unknown) {
-      console.error('Erreur lors de la réinitialisation du mot de passe', err);
+      // console.error('Erreur lors de la réinitialisation du mot de passe', err);
+      return "Erreur lors de l'envois de l'email";
     }
     
   }

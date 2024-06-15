@@ -50,15 +50,18 @@ export class InscriptionComponent implements OnInit{
 
         this.authService.inscription(formData.email, formData.password)
           .then(res => {
+            // console.log(res)
             if (res === true) {
               this.router.navigate(['/HomeCult']);
+            }else if(res === 'auth/weak-password'){
+              this.messageError = "Mot de passe trop faible";
             }else{
               this.messageError = res;
             }
           })
           .catch(err => {
             console.error(err)
-            this.messageError = "Une erreur est survenue lors de la connexion";
+            this.messageError = "Une erreur est survenue lors de l'inscription ";
           })
           
         

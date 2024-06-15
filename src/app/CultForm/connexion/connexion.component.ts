@@ -51,7 +51,7 @@ export class ConnexionComponent implements OnInit {
      
       const formData = {
         email: this.crypt.encrypt(this.authCoForm.value.email),
-        password: this.crypt.encrypt(this.authCoForm.value.mdp)
+        password: this.crypt.encrypt(this.authCoForm.value.password)
       };
 
       this.authService.connexion(formData.email, formData.password)
