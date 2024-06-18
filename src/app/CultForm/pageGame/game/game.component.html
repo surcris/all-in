@@ -1,12 +1,53 @@
 <div class="body-game">
-    <div class="combat-zone">
-        <div class="Perso"></div>
-        <div class="Enemy"></div>
-    </div>
+    
     <div class="header-game">
         <ul>
             <li><a [routerLink]="['/HomeCult']">Accueil</a></li>
         </ul>
     </div>
     <div class="top-game"></div>
+
+    <div class="combat-zone">
+        <div class="Perso">
+            <div class="Perso-container">
+                <div class="Perso-img">
+                    <div class="Perso-lvl">
+                        <h3>{{this.jNom}}</h3>
+                        <p>Niveau {{this.jNiveau}}</p>
+                    </div>
+                </div>
+                
+                <div class="Perso-vie">
+                    <div class="Perso-barre"></div>
+                </div>
+            </div>
+            <div class="Perso-skill-container">
+                <ul>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </div>
+        </div>
+        <div class="Enemy">
+            <div class="Enemy-container">
+                <div class="Enemy-img">
+                    <div class="Enemy-lvl">
+                        <h3>Enemy</h3>
+                        <p>Niveau 80</p>
+                    </div>
+                    
+                </div>
+                <div class="Enemy-vie">
+                    <div class="Enemy-barre"></div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
 </div>

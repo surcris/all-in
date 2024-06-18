@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
-import { Joueur } from '../../model/joueur.model';
-
-
+import { Mob } from '../../model/mob.model';
+Mob
 @Injectable({
   providedIn: 'root'
 })
-export class PersonnageService {
-  private joueur: Joueur
-  constructor() {
-    this.joueur = new Joueur(
-      'Hero',      // pseudo
+export class MobService {
+  private mob: Mob;
+
+  constructor() { 
+    this.mob = new Mob(
+      
       1000,         // vieMax
-      10,         // vieAct
+      777,         // vieAct
+      'Mob',      // pseudo
       1,           // niveau
       10,          // eau
       10,          // feu
@@ -30,11 +31,11 @@ export class PersonnageService {
     );
   }
 
-  getJoueur(): Joueur {
-    return this.joueur;
+  getMob(): Mob {
+    return this.mob;
   }
 
   getPourcentVie(): number {
-    return this.getJoueur().getVieAct()*100/this.getJoueur().getVieMax()
+    return this.getMob().getVieAct()*100/this.getMob().getVieMax()
   }
 }
