@@ -1,0 +1,118 @@
+.Perso-barre,
+.Enemy-barre {
+    height: 100%;
+    background-color: azure;
+    border-radius: 5px;
+}
+
+.Perso {
+    border: solid rgb(28, 0, 128) 1px;
+    grid-area: Perso;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    .Perso-container {
+        border: solid rgb(28, 0, 128) 1px;
+        max-width: 300px;
+        width: 40%;
+        height: 80%;
+
+        .Perso-img {
+            border: solid rgb(128, 0, 0) 1px;
+            height: 90%;
+            width: 100%;
+            position: relative;
+
+            .Perso-lvl {
+                position: absolute;
+                bottom: 0;
+                border: solid rgb(235, 235, 235) 1px;
+                width: 100%;
+
+                p,
+                h3 {
+                    text-align: center;
+                }
+            }
+        }
+
+        .Perso-vie {
+            border: solid rgb(0, 128, 17) 1px;
+            height: 10%;
+            width: 100%;
+            padding: 5px;
+
+            .Perso-barre {}
+        }
+    }
+
+    .Perso-skill-container {
+        border: solid rgb(173, 173, 173) 1px;
+        max-width: 130px;
+        width: 20%;
+        height: 80%;
+
+        ul {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+
+            li {
+                border: solid rgb(28, 0, 128) 1px;
+                list-style: none;
+                width: 50%;
+                height: 25%;
+            }
+        }
+    }
+}
+
+.Enemy {
+    border: solid rgb(128, 0, 0) 1px;
+    grid-area: Enemy;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    .Enemy-container {
+        border: solid rgb(28, 0, 128) 1px;
+        max-width: 300px;
+        width: 40%;
+        height: 80%;
+
+        .Enemy-img {
+            border: solid rgb(128, 0, 0) 1px;
+            height: 90%;
+            width: 100%;
+            position: relative;
+
+            .Enemy-lvl {
+                position: absolute;
+                bottom: 0;
+                border: solid rgb(235, 235, 235) 1px;
+                width: 100%;
+
+                p,
+                h3 {
+                    text-align: center;
+                }
+            }
+        }
+
+        .Enemy-vie {
+            border: solid rgb(0, 128, 17) 1px;
+            height: 10%;
+            width: 100%;
+            padding: 5px;
+
+
+            .Enemy-barre {}
+        }
+    }
+}
