@@ -55,7 +55,7 @@ export class CombatService {
   }
 
   initCombat(){
-    this.startTour(); // commence le compte a rebour du tour
+    // this.startTour(); // commence le compte a rebour du tour
     this.joueurAJoue = false;
     this.tourPlayerAct = 'joueur';
     this.statusCombat = false;
