@@ -21,8 +21,7 @@ export class Mob implements Personnage {
     private _resBrut: number;
 
     private _niveau: number;
-    private _xp: number;
-    private _expLvl: number;
+    
 
     private _domaine?: string;
     private _niveauDomaineRang?: number;
@@ -47,8 +46,8 @@ export class Mob implements Personnage {
         resBrut: number,
 
         niveau: number,
-        xp: number,
-        expLvl: number,
+        // xp: number,
+        // expLvl: number,
         
         domaine?: string,
         niveauDomaineRang?: number
@@ -69,8 +68,7 @@ export class Mob implements Personnage {
         this._resTerre = resTerre;
         this._resAir = resAir;
         this._resBrut = resBrut;
-        this._xp = xp;
-        this._expLvl = expLvl;
+
         this._domaine = domaine;
         this._niveauDomaineRang = niveauDomaineRang;
     }
@@ -94,7 +92,19 @@ export class Mob implements Personnage {
         return this._vieAct;
     }
     setVieAct(value: number): void {
-        this._vieAct = value;
+        // console.log("valeur Mob : ", value);
+        if(value < 0){
+            
+            this._vieAct = 0;
+        }else if( value > this.getVieMax() ){
+            
+            this._vieAct = this.getVieMax();
+        }else{
+            
+            this._vieAct = value;
+        }
+        
+        
     }
 
     getNiveau(): number {
@@ -188,19 +198,7 @@ export class Mob implements Personnage {
         this._resBrut = value;
     }
 
-    getXp(): number {
-        return this._xp;
-    }
-    setXp(value: number): void {
-        this._xp = value;
-    }
-
-    getExpLvl(): number {
-        return this._expLvl;
-    }
-    setExpLvl(value: number): void {
-        this._expLvl = value;
-    }
+    
 
     getDomaine(): string | undefined {
         return this._domaine;

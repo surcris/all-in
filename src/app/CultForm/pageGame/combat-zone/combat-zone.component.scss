@@ -44,7 +44,15 @@
             height: 10%;
             width: 100%;
             padding: 5px;
+            position: relative;
 
+            p{
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                font-weight: 600;
+            }
             .Perso-barre {}
         }
     }
@@ -67,6 +75,11 @@
                 list-style: none;
                 width: 50%;
                 height: 25%;
+                div{
+                    width: 100%;
+                    height: 100%;
+                    background-color: rgb(192, 116, 16);
+                }
             }
         }
     }
@@ -110,7 +123,14 @@
             height: 10%;
             width: 100%;
             padding: 5px;
-
+            position: relative;
+            p{
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                font-weight: 600;
+            }
 
             .Enemy-barre {}
         }

@@ -50,11 +50,11 @@ export interface Personnage {
   setResBrut(value: number): void;
 
   // Expérience
-  getXp(): number;
-  setXp(value: number): void;
+  // getXp(): number;
+  // setXp(value: number): void;
 
-  getExpLvl(): number;
-  setExpLvl(value: number): void;
+  // getExpLvl(): number;
+  // setExpLvl(value: number): void;
 
   // Domaine
   getDomaine(): string | undefined;

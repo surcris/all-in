@@ -21,8 +21,8 @@ export class Joueur {
     private _resBrut: number;
 
     private _niveau: number;
-    private _xp: number;
-    private _expLvl: number;
+    private _energie: number;
+    private _energieLvl: number;
 
     private _domaine?: string;
     private _niveauDomaineRang?: number;
@@ -44,8 +44,8 @@ export class Joueur {
         resTerre: number,
         resAir: number,
         resBrut: number,
-        xp: number,
-        expLvl: number,
+        energie: number,
+        energieLvl: number,
         domaine?: string,
         niveauDomaineRang?: number
     ) {
@@ -66,8 +66,8 @@ export class Joueur {
         this._resTerre = resTerre;
         this._resAir = resAir;
         this._resBrut = resBrut;
-        this._xp = xp;
-        this._expLvl = expLvl;
+        this._energie = energie;
+        this._energieLvl = energieLvl;
         this._domaine = domaine;
         this._niveauDomaineRang = niveauDomaineRang;
     }
@@ -91,7 +91,15 @@ export class Joueur {
         return this._vieAct;
     }
     setVieAct(value: number): void {
-        this._vieAct = value;
+        // console.log("valeur Joueur : ", value);
+
+        if(value < 0){
+            this._vieAct = 0;
+        }else if( value > this.getVieMax() ){
+            this._vieAct = this.getVieMax();
+        }else{
+            this._vieAct = value;
+        }
     }
 
     getNiveau(): number {
@@ -185,18 +193,26 @@ export class Joueur {
         this._resBrut = value;
     }
 
-    getXp(): number {
-        return this._xp;
+    getEnergie(): number {
+        return this._energie;
     }
-    setXp(value: number): void {
-        this._xp = value;
+    setEnergie(value: number): void {
+        
+
+        if(value < 0){
+            this._energie = 0;
+        }else if( value > this.getEnergieLvl() ){
+            this._energie = this.getEnergieLvl();
+        }else{
+            this._energie = value;
+        }
     }
 
-    getExpLvl(): number {
-        return this._expLvl;
+    getEnergieLvl(): number {
+        return this._energieLvl;
     }
-    setExpLvl(value: number): void {
-        this._expLvl = value;
+    setEnergieLvl(value: number): void {
+        this._energieLvl = value;
     }
 
     getDomaine(): string | undefined {

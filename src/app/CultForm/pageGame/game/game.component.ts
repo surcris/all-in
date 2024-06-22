@@ -1,7 +1,7 @@
 import { Component , OnInit, Renderer2, ElementRef} from '@angular/core';
 import { HeaderCultFormComponent } from '../../header-cult-form/header-cult-form.component';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { PersonnageService } from '../../../services/game/personnage.service';
+import { JoueurService } from '../../../services/game/joueur.service';
 import { MobService } from '../../../services/game/mob.service';
 import { CombatZoneComponent } from '../combat-zone/combat-zone.component';
 
