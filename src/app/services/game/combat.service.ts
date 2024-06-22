@@ -344,13 +344,17 @@ export class CombatService {
 
   attendreClicBouton(): Promise<string> {
     return new Promise<string>((resolve) => {
-      const bouton = document.getElementById("btn-1"); // Remplacez par l'ID de votre bouton
-      if (bouton && this.tourPlayerAct === "joueur") {
-        bouton.addEventListener("click", () => {
-          // this.joueurAJoue = !this.joueurAJoue;
-          // this.tourPlayerAct="mob";
-          resolve("Bouton appuyé !"); // Résout la promesse lorsque le bouton est cliqué
-        });
+      const boutons = document.querySelectorAll('[id^="btn-"]') // Remplacez par l'ID de votre bouton
+      
+      // console.log(boutons)
+      if (boutons && this.tourPlayerAct === "joueur") {
+        boutons.forEach((bouton) => {
+          bouton.addEventListener("click", () => {
+              // console.log("Bouton appuyé !");
+              resolve(bouton.id); // Résout la promesse avec l'id du bouton cliqué
+          });
+      });
+        
       }
 
     });

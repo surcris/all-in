@@ -17,7 +17,7 @@ export class CombatZoneComponent implements OnInit {
   private l_Combat: CombatService = new CombatService;
 
   private joueur = this.l_Combat.getJoueurService();
-  public mob = this.l_Combat.mob;
+  public mob = this.l_Combat.getMobService();
 
 
   myWidthEnemy: number = this.l_mob.getPourcentVie();
@@ -34,9 +34,7 @@ export class CombatZoneComponent implements OnInit {
 
   constructor(private renderer: Renderer2, private el: ElementRef) {
 
-    this.l_Combat.initCombat()
-    this.l_Combat.reinitPersonnage();
-    this.startCombat()
+    
    
   }
 
@@ -65,7 +63,9 @@ export class CombatZoneComponent implements OnInit {
       this.infoMob = infoMob;
     });
 
-    // console.log(this.infoMob,this.infoJoueur)
+    this.l_Combat.initCombat()
+    this.l_Combat.reinitPersonnage();
+    this.startCombat()
     
   }
 
@@ -73,23 +73,23 @@ export class CombatZoneComponent implements OnInit {
     // this.l_Combat.clicK()
     const air = this.l_perso.sortAir(this.mob.getResAir(),this.mob.getResBrut())
     this.l_Combat.tourJoueur(air)
-    console.log(air)
+    // console.log(air)
   }
 
   skillCase2(){
     const eau = this.l_perso.sortEau(this.mob.getResEau(),this.mob.getResBrut())
     this.l_Combat.tourJoueur(eau)
-    console.log(eau)
+    // console.log(eau)
   }
   skillCase3(){
     const feu = this.l_perso.sortFeu(this.mob.getResFeu(),this.mob.getResBrut())
     this.l_Combat.tourJoueur(feu)
-    console.log(feu)
+    // console.log(feu)
   }
   skillCase4(){
     const terre = this.l_perso.sortTerre(this.mob.getResTerre(),this.mob.getResBrut())
     this.l_Combat.tourJoueur(terre)
-    console.log(terre)
+    // console.log(terre)
   }
 
   btnBoucle(){
