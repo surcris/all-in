@@ -1,0 +1,22 @@
+.menu-game{
+    
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    .icon-container{
+        margin: 5px;
+        border: #4D194D solid 2px;
+        background-color: antiquewhite;
+        border-radius: 50%;
+        height: 50px;
+        width: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        i{
+            color: #4D194D;
+            font-size: 25px;
+        }
+    }
+}

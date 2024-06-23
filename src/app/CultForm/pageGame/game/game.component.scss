@@ -16,7 +16,7 @@
         "combat-zone";
 
         .combat-zone {
-            border: solid purple 1px;
+            // border: solid purple 1px;
             display: grid;
             grid-template-columns: 1fr 1fr;
             grid-template-rows: 1fr;
@@ -28,7 +28,7 @@
         }
     
     .header-game {
-        border: solid rgb(128, 0, 0) 1px;
+        // border: solid rgb(128, 0, 0) 1px;
         grid-area: header-game;
 
         display: flex;
@@ -49,8 +49,31 @@
     }
     
     .top-game {
-        border: solid rgb(28, 0, 128) 1px;
+        // border: solid rgb(28, 0, 128) 1px;
         grid-area: top-game;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        .aff{
+            // border: solid rgb(160, 160, 160) 1px;
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            .left-container,.middle-container,.right-container{
+                width: 33%;
+                height: 100%;
+            }
+            .left-container{
+
+                border: solid rgb(160, 160, 160) 1px;
+            }
+            .middle-container{
+                border: solid rgb(209, 0, 0) 1px;
+            }
+            .right-container{
+                border: solid rgb(9, 153, 9) 1px;
+            }
+        }
     }
 }
 
