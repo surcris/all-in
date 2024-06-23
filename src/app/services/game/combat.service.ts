@@ -4,6 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 import { JoueurService } from './joueur.service';
 import { Joueur } from '../../model/joueur.model';
 import { Mob } from '../../model/mob.model';
+import { LocalStorageGameService } from './local-storage-game.service';
 MobService
 JoueurService
 
@@ -12,6 +13,8 @@ JoueurService
 })
 export class CombatService {
 
+  private localStorageService:LocalStorageGameService = new LocalStorageGameService()
+  
   private l_mob: MobService = new MobService;
   private l_perso: JoueurService = new JoueurService;
 
@@ -37,6 +40,7 @@ export class CombatService {
   infoMob$ = this.infoMobSubject.asObservable();
 
   public btnCombatBoucle:boolean = false;
+
 
   constructor() {
     
@@ -65,6 +69,7 @@ export class CombatService {
  
     
   }
+
   getMobService():Mob{
     return this.mob
   }
@@ -79,9 +84,6 @@ export class CombatService {
     this.updateInfoMob(mob)
   }
 
-  baliseMob(){
-    console.log("Balise mob",this.mob)
-  }
 
   setbtnCombatBoucle(){
     this.btnCombatBoucle = !this.btnCombatBoucle ;
@@ -259,9 +261,9 @@ export class CombatService {
 
   calculRecompense(joueur: Joueur, mob: Mob) {
     const eneGain = this.calculerEnergieGagnee(joueur, mob);
+    this.joueur.setEnergie(eneGain)
     console.log('Énergie gagnée', eneGain);
   }
-
 
   stopTour() {
     // console.log('Stop')
@@ -271,7 +273,6 @@ export class CombatService {
       this.compteR = 10;
     }
   }
-
 
   startTour() {
     // console.log('Start')
@@ -287,8 +288,6 @@ export class CombatService {
       }
     }, 100);
   }
-
-
 
   tourJoueur(sort: number) {
     if (this.tourPlayerAct === "joueur") {
@@ -308,10 +307,10 @@ export class CombatService {
 
   tourMob() {
     if (this.tourPlayerAct === "mob") {
-      console.log("Tour : ", this.tourPlayerAct);
+      // console.log("Tour : ", this.tourPlayerAct);
       
         const McJ = this.calculDegatsElementaire(this.mob, this.joueur, "air");
-        console.log('Dégâts du Mob', McJ);
+        // console.log('Dégâts du Mob', McJ);
         if (typeof McJ !== "undefined") {
           this.joueur.setVieAct(this.joueur.getVieAct() - McJ);
 
@@ -323,18 +322,29 @@ export class CombatService {
     }
   }
 
+  saveInfoJoueur(){
+    this.localStorageService.setItem("Joueur",this.joueur)
+    console.log("info sauvegarder")
+  }
+
+  getInfoJoueur(){
+    const r = this.localStorageService.getItem("Joueur")
+    console.log(r)
+  }
 
   finCombat(joueur: Joueur,mob: Mob ) {
     this.reinitPersonnage()
+    
     this.statusCombat = false;
     this.tourPlayerAct = "";
     this.nbrTour=0;
 
     if (mob.getVieAct() <= 0) {
-      console.log("Victoire du Joueur")
+      // console.log("Victoire du Joueur")
       this.calculRecompense(joueur, mob)
+      this.saveInfoJoueur();
     }else{
-      console.log("Victoire du Mob")
+      // console.log("Victoire du Mob")
     }
   }
 
@@ -345,7 +355,7 @@ export class CombatService {
   attendreClicBouton(): Promise<string> {
     return new Promise<string>((resolve) => {
       const boutons = document.querySelectorAll('[id^="btn-"]') // Remplacez par l'ID de votre bouton
-      
+    
       // console.log(boutons)
       if (boutons && this.tourPlayerAct === "joueur") {
         boutons.forEach((bouton) => {
@@ -359,14 +369,15 @@ export class CombatService {
 
     });
   }
+
   async attenteJ() {
     if (this.tourPlayerAct === "joueur") {
     let t: NodeJS.Timeout | null;
     
-      console.log("En attente de l'appui sur le bouton...");
+      // console.log("En attente de l'appui sur le bouton...");
       const attente = new Promise<string>((resolve) => {
         t = setTimeout(() => {
-          console.log("Joueur Temps écoulé !");
+          // console.log("Joueur Temps écoulé !");
           this.tourPlayerAct="mob";
           resolve("Temps écoulé !"); // Résout la promesse après 10 secondes
         }, 10000);
@@ -396,7 +407,7 @@ export class CombatService {
     this.nbrTour++;
     this.statusCombat = true;
     // this.tourPlayerAct = 'joueur';
-    console.log("++++++++++ Tour ",this.nbrTour," +++++++++")
+    // console.log("++++++++++ Tour ",this.nbrTour," +++++++++")
     await this.attenteJ();
     
 
@@ -435,15 +446,12 @@ export class CombatService {
       
     }else{
       // console.log("2.2")
-      console.log("++++++++++ END Tour ",this.nbrTour," +++++++++")
+      // console.log("++++++++++ END Tour ",this.nbrTour," +++++++++")
       await this.cbtTbT()
     }
     
   }
 
   
-
-
-
 
 }

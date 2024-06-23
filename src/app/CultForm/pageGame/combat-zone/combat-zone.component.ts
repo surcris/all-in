@@ -2,7 +2,8 @@ import { Component, OnInit, Renderer2, ElementRef } from '@angular/core';
 import { JoueurService } from '../../../services/game/joueur.service';
 import { MobService } from '../../../services/game/mob.service';
 import { CombatService } from '../../../services/game/combat.service';
-CombatService
+import { LocalStorageGameService } from '../../../services/game/local-storage-game.service';
+LocalStorageGameService
 
 @Component({
   selector: 'app-combat-zone',
@@ -12,6 +13,7 @@ CombatService
   styleUrl: './combat-zone.component.scss'
 })
 export class CombatZoneComponent implements OnInit {
+  private localStorageService:LocalStorageGameService = new LocalStorageGameService()
   private l_mob: MobService = new MobService;
   private l_perso: JoueurService = new JoueurService;
   private l_Combat: CombatService = new CombatService;
@@ -108,6 +110,26 @@ export class CombatZoneComponent implements OnInit {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
+  // saveInfoJoueur(){
+  //   this.localStorageService.setItem("Joueur",this.joueur)
+  //   console.log("info sauvegarder")
+  // }
+
+  getInfoJoueur(){
+    const r = this.localStorageService.getItem("Joueur")
+    
+    // assigner les donner du localstorage a joueur 
+    // if (typeof r !== 'string') {
+      // Object.assign(this.joueur, r);
+    // }else {
+    // console.log("infojoueur sauvegarder erreur")
+    //}
+
+    
+
+    console.log(r, this.joueur)
+  }
+  
   
 
 }
