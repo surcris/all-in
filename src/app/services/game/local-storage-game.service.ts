@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CryptService } from '../crypt.service';
+import { JoueurService } from './joueur.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,15 +17,15 @@ export class LocalStorageGameService {
     
   }
 
-  getItem(key: string): any | null {
+  getItemJoueur(key: string): any | null {
     const d = localStorage.getItem(key);
     if (d !== null) {
       const decryptValueString = this.cryptService.decrypt(d);
       const r = JSON.parse(decryptValueString)
-
-      return r;
+      const j = new JoueurService().setJoueur(r)
+      return j;
     }else{
-      return "Ne contient aucune information";
+      return null;
     }
     
   }

@@ -8,6 +8,7 @@ import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getDatabase, provideDatabase } from '@angular/fire/database';
 import { environment } from '../environments/environment';
+import { CombatService } from './services/game/combat.service';
 
 
 export const appConfig: ApplicationConfig = {
@@ -15,6 +16,9 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(),
     importProvidersFrom(ReactiveFormsModule), 
-    provideFirebaseApp(() => initializeApp(environment.firebaseConfig)), provideAuth(() => getAuth()), provideDatabase(() => getDatabase())
+    provideFirebaseApp(() => initializeApp(environment.firebaseConfig)), 
+    provideAuth(() => getAuth()), 
+    provideDatabase(() => getDatabase()),
+    CombatService
   ]
 };

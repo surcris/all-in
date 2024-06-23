@@ -4,9 +4,9 @@
 
         </div>
         <div class="perso-info" >
-            <h3>Domaine Rang</h3>
-            <p>Niveau 1</p>
-            <p>Energie/Energie</p>
+            <h3>{{this.joueurObs?.getPseudo()}}</h3>
+            <p>Domaine Rang {{this.joueurObs?.getNiveau()}}</p>
+            <p>Energies {{this.joueurObs?.getEnergie()}} / {{this.joueurObs?.getEnergieLvl()}}</p>
         </div>
     </div>
     <div class="at-container">
@@ -14,7 +14,7 @@
             <div class="carac-info">
                 <p>Vie</p>
                 <div class="atr-add">
-                    <p>Attribut</p>
+                    <p>{{this.joueurObs?.getVieMax()}}</p>
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" viewBox="0 0 20 20" height="30" fill="none" class="svg-icon">
                         <g stroke-width="1.5" stroke-linecap="round" stroke="#de8a2a">
                             <circle r="8" cy="10" cx="10"></circle>
@@ -26,9 +26,9 @@
                 </div>
             </div>
             <div class="carac-info">
-                <p>Nom Attribut</p>
+                <p>Air</p>
                 <div class="atr-add">
-                    <p>Attribut</p>
+                    <p>{{this.joueurObs?.getAir()}}</p>
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" viewBox="0 0 20 20" height="30" fill="none" class="svg-icon">
                         <g stroke-width="1.5" stroke-linecap="round" stroke="#de8a2a">
                             <circle r="8" cy="10" cx="10"></circle>
@@ -40,9 +40,9 @@
                 </div>
             </div>
             <div class="carac-info">
-                <p>Nom Attribut</p>
+                <p>Eau</p>
                 <div class="atr-add">
-                    <p>Attribut</p>
+                    <p>{{this.joueurObs?.getEau()}}</p>
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" viewBox="0 0 20 20" height="30" fill="none" class="svg-icon">
                         <g stroke-width="1.5" stroke-linecap="round" stroke="#de8a2a">
                             <circle r="8" cy="10" cx="10"></circle>
@@ -54,9 +54,9 @@
                 </div>
             </div>
             <div class="carac-info">
-                <p>Nom Attribut</p>
+                <p>Feu</p>
                 <div class="atr-add">
-                    <p>Attribut</p>
+                    <p>{{this.joueurObs?.getFeu()}}</p>
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" viewBox="0 0 20 20" height="30" fill="none" class="svg-icon">
                         <g stroke-width="1.5" stroke-linecap="round" stroke="#de8a2a">
                             <circle r="8" cy="10" cx="10"></circle>
@@ -68,9 +68,9 @@
                 </div>
             </div>
             <div class="carac-info">
-                <p>Nom Attribut</p>
+                <p>Terre</p>
                 <div class="atr-add">
-                    <p>Attribut</p>
+                    <p>{{this.joueurObs?.getTerre()}}</p>
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" viewBox="0 0 20 20" height="30" fill="none" class="svg-icon">
                         <g stroke-width="1.5" stroke-linecap="round" stroke="#de8a2a">
                             <circle r="8" cy="10" cx="10"></circle>
@@ -84,17 +84,24 @@
         </div>
     
         <div class="attribut-do">
+            <!-- <div class="carac-info">
+                <p>Data </p>
+                <div class="atr">
+                    <p>{{data}}</p>
+                    
+                </div>
+            </div> -->
             <div class="carac-info">
                 <p>Dommage </p>
                 <div class="atr">
-                    <p>Attribut</p>
+                    <p>{{this.joueurObs?.getDommage()}}</p>
                     
                 </div>
             </div>
             <div class="carac-info">
                 <p>Puissance </p>
                 <div class="atr">
-                    <p>Attribut</p>
+                    <p>{{this.joueurObs?.getPuissance()}}</p>
                 </div>
             </div>
             
@@ -103,37 +110,37 @@
     
         <div class="attribut-res">
             <div class="carac-info">
-                <p>Res Attribut</p>
+                <p>Résistance brut</p>
                 <div class="atr">
-                    <p>Attribut</p>
+                    <p>{{this.joueurObs?.getResBrut()}}</p>
                     
                 </div>
             </div>
             <div class="carac-info">
-                <p>Res Attribut</p>
+                <p>Résistance Air</p>
                 <div class="atr">
-                    <p>Attribut</p>
+                    <p>{{this.joueurObs?.getResAir()}}</p>
                     
                 </div>
             </div>
             <div class="carac-info">
-                <p>Res Attribut</p>
+                <p>Résistance Eau</p>
                 <div class="atr">
-                    <p>Attribut</p>
+                    <p>{{this.joueurObs?.getResEau()}}</p>
                     
                 </div>
             </div>
             <div class="carac-info">
-                <p>Res Attribut</p>
+                <p>Résistance Feu</p>
                 <div class="atr">
-                    <p>Attribut</p>
+                    <p>{{this.joueurObs?.getResFeu()}}</p>
                     
                 </div>
             </div>
             <div class="carac-info">
-                <p>Nom Attribut</p>
+                <p>Résistance Terre</p>
                 <div class="atr">
-                    <p>Attribut</p>
+                    <p>{{this.joueurObs?.getResTerre()}}</p>
                 </div>
             </div>
         </div>

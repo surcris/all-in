@@ -3,6 +3,7 @@ import { JoueurService } from '../../../services/game/joueur.service';
 import { MobService } from '../../../services/game/mob.service';
 import { CombatService } from '../../../services/game/combat.service';
 import { LocalStorageGameService } from '../../../services/game/local-storage-game.service';
+import { Subscription } from 'rxjs';
 LocalStorageGameService
 
 @Component({
@@ -16,7 +17,7 @@ export class CombatZoneComponent implements OnInit {
   private localStorageService:LocalStorageGameService = new LocalStorageGameService()
   private l_mob: MobService = new MobService;
   private l_perso: JoueurService = new JoueurService;
-  private l_Combat: CombatService = new CombatService;
+  // private l_Combat: CombatService = new CombatService;
 
   private joueur = this.l_Combat.getJoueurService();
   public mob = this.l_Combat.getMobService();
@@ -34,7 +35,9 @@ export class CombatZoneComponent implements OnInit {
   infoJoueur:any;
   infoMob:any;
 
-  constructor(private renderer: Renderer2, private el: ElementRef) {
+
+
+  constructor(private renderer: Renderer2, private el: ElementRef, private l_Combat: CombatService) {
 
     
    
@@ -75,6 +78,7 @@ export class CombatZoneComponent implements OnInit {
     // this.l_Combat.clicK()
     const air = this.l_perso.sortAir(this.mob.getResAir(),this.mob.getResBrut())
     this.l_Combat.tourJoueur(air)
+    this.l_Combat.sendJoueur(this.joueur)
     // console.log(air)
   }
 
@@ -116,7 +120,7 @@ export class CombatZoneComponent implements OnInit {
   // }
 
   getInfoJoueur(){
-    const r = this.localStorageService.getItem("Joueur")
+    const r = this.localStorageService.getItemJoueur("Joueur")
     
     // assigner les donner du localstorage a joueur 
     // if (typeof r !== 'string') {
@@ -124,7 +128,7 @@ export class CombatZoneComponent implements OnInit {
     // }else {
     // console.log("infojoueur sauvegarder erreur")
     //}
-
+    // this.l_Combat.sendMessage(this.joueur)
     
 
     console.log(r, this.joueur)

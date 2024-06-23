@@ -6,6 +6,10 @@ import { MobService } from '../../../services/game/mob.service';
 import { CombatZoneComponent } from '../combat-zone/combat-zone.component';
 import { MenuGameComponent } from '../menu-game/menu-game.component';
 import { AttributGameComponent } from '../attribut-game/attribut-game.component';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { LocalStorageGameService } from '../../../services/game/local-storage-game.service';
+import { Joueur } from '../../../model/joueur.model';
+import { CombatService } from '../../../services/game/combat.service';
 
 
 
@@ -17,22 +21,41 @@ import { AttributGameComponent } from '../attribut-game/attribut-game.component'
   styleUrl: './game.component.scss'
 })
 export class GameComponent implements OnInit{
+  joueurObs = new BehaviorSubject<any>(null);
+  joueur = this.joueurObs.asObservable();
+  private lsj = new LocalStorageGameService();
 
-  constructor() {
+  constructor(private l_Combat: CombatService) {
     
   }
-
-  
 
   ngOnInit() {
-    
+    this.initJoueur();
   }
 
-  // Test modification width barre de vie 
-  // attck(){
-  //   this.myWidth = 100;
-  //   this.renderer.setStyle(this.bodyGame, 'width', `${this.myWidth * 1}%`);
-  //   console.log(this.myWidth)
-  // }
+
+  initJoueur(){
+    const l = this.lsj.getItemJoueur("Joueur")
+    if (l !== null) {
+      // this.joueurObs.next(l)
+      this.l_Combat.sendJoueur(l)
+      console.log("EEE",l)
+    }else{
+      const j = new JoueurService().getJoueur()
+      // this.joueurObs.next(j)
+      this.l_Combat.sendJoueur(j)
+      console.log("DDD",j)
+    }
+  }
+
+  updateJoueurMain(joueur: any) {
+    const currentJoueur = this.joueurObs;
+    if (currentJoueur) {
+      const updatedJoueur = joueur;
+      
+      this.joueurObs.next(updatedJoueur);
+      console.log('Joueur mis à jour :', updatedJoueur);
+    }
+  }
  
 }

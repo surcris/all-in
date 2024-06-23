@@ -6,7 +6,9 @@ import { Joueur } from '../../model/joueur.model';
   providedIn: 'root'
 })
 export class JoueurService {
-  private joueur: Joueur
+  private joueur: Joueur;
+
+  
   constructor() {
     this.joueur = new Joueur(
       'Hero',      // pseudo
@@ -36,6 +38,58 @@ export class JoueurService {
 
   getPourcentVie(): number {
     return this.getJoueur().getVieAct()*100/this.getJoueur().getVieMax()
+  }
+
+  getDataJoueur(data: any){
+    const b = {
+      "_pseudo": data._pseudo,      // pseudo
+      "_vieMax": data._vieMax,         // vieMax
+      "_vieAct": data._vieAct,         // vieAct
+      "_niveau": data._niveau,           // niveau
+      "_eau": data._eau,          // eau
+      "_feu":data._feu,          // feu
+      "_air":data._air,          // air
+      "_terre":data._terre,          // terre
+      "_puissance":data._puissance,          // puissance
+      "_dommage":data._dommage,          // dommage
+      "_degatBrut":data._degatBrut,           // degatBrut
+      "_resEau":data._resEau,          // resEau
+      "_resFeu":data._resFeu,          // resFeu
+      "_resTerre":data._resTerre,          // resTerre
+      "_resAir":data._resAir,          // resAir
+      "_resBrut":data._resBrut,           // resBrut
+      "_energie":data._energie,           // xp
+      "_energieLvl":data._energieLvl 
+    }
+    return b
+     
+    
+  }
+
+  setJoueur(data: any){
+
+    const joueur = new Joueur(
+      data._pseudo,      // pseudo
+      data._vieMax,         // vieMax
+      data._vieAct,         // vieAct
+      data._niveau,           // niveau
+      data._eau,          // eau
+      data._feu,          // feu
+      data._air,          // air
+      data._terre,          // terre
+      data._puissance,          // puissance
+      data._dommage,          // dommage
+      data._degatBrut,           // degatBrut
+      data._resEau,          // resEau
+      data._resFeu,          // resFeu
+      data._resTerre,          // resTerre
+      data._resAir,          // resAir
+      data._resBrut,           // resBrut
+      data._energie,           // xp
+      data._energieLvl          // expLvl
+    );
+    
+    return joueur;
   }
 
   calculerDegats(

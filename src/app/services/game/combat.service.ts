@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { MobService } from './mob.service';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { JoueurService } from './joueur.service';
 import { Joueur } from '../../model/joueur.model';
 import { Mob } from '../../model/mob.model';
 import { LocalStorageGameService } from './local-storage-game.service';
+import { GameComponent } from '../../CultForm/pageGame/game/game.component';
 MobService
 JoueurService
 
@@ -14,7 +15,7 @@ JoueurService
 export class CombatService {
 
   private localStorageService:LocalStorageGameService = new LocalStorageGameService()
-  
+  // private jObs:GameComponent ;
   private l_mob: MobService = new MobService;
   private l_perso: JoueurService = new JoueurService;
 
@@ -39,6 +40,7 @@ export class CombatService {
   // Cet observable permet aux composants de s'abonner et de réagir aux mises à jour des informations du mob.
   infoMob$ = this.infoMobSubject.asObservable();
 
+  private subject = new Subject<any>();
   public btnCombatBoucle:boolean = false;
 
 
@@ -47,6 +49,18 @@ export class CombatService {
     // this.initInfo(this.joueur,this.mob)
   }
 
+  sendJoueur(message: any) {
+    this.subject.next(message);
+    // console.log(message)
+  }
+
+  clearMessages() {
+    this.subject.next('');
+  }
+
+  getJoueur(): Observable<any> {
+    return this.subject.asObservable();
+  }
 
   reinitPersonnage(){
 
@@ -123,7 +137,10 @@ export class CombatService {
       niveau: this.joueur.getNiveau(),
     };
     this.infoJoueurSubject.next(infoJoueur); // mise à jour infoJoueur
-    // console.log(infoJoueur.vieAct);
+    // this.jObs.updateJoueurMain(this.joueur)
+    this.sendJoueur(this.joueur)
+    // this.setData("dddd")
+    console.log("Update",this.joueur);
   }
 
 
@@ -307,7 +324,7 @@ export class CombatService {
 
   tourMob() {
     if (this.tourPlayerAct === "mob") {
-      // console.log("Tour : ", this.tourPlayerAct);
+      console.log("Tour : ", this.tourPlayerAct);
       
         const McJ = this.calculDegatsElementaire(this.mob, this.joueur, "air");
         // console.log('Dégâts du Mob', McJ);
@@ -323,12 +340,13 @@ export class CombatService {
   }
 
   saveInfoJoueur(){
+    this.updateInfoJoueur(this.joueur)
     this.localStorageService.setItem("Joueur",this.joueur)
     console.log("info sauvegarder")
   }
 
   getInfoJoueur(){
-    const r = this.localStorageService.getItem("Joueur")
+    const r = this.localStorageService.getItemJoueur("Joueur")
     console.log(r)
   }
 
