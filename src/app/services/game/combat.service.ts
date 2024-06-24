@@ -15,60 +15,62 @@ JoueurService
 export class CombatService {
 
   private localStorageService:LocalStorageGameService = new LocalStorageGameService()
-  // private jObs:GameComponent ;
+
   private l_mob: MobService = new MobService;
   private l_perso: JoueurService = new JoueurService;
 
-  private joueur:Joueur = this.l_perso.getJoueur();
+  joueur:Joueur = this.l_perso.getJoueur();
   public mob:Mob = this.l_mob.getMob();
 
   private compteR: number = 10;
   private timeoutId: any = null;
   private tourPlayerAct: string = '';
+  
   private joueurAJoue: boolean = false;
   private statusCombat:boolean = false;
   private nbrTour:number = 0;
-
-  private infoJoueurSubject = new BehaviorSubject<any>(null); // Création d'un BehaviorSubject pour stocker les informations du joueur. Il est initialisé à null.
-  private infoMobSubject = new BehaviorSubject<any>(null); // Création d'un BehaviorSubject pour stocker les informations du mob. Il est initialisé à null.
-
-  // Création d'un observable pour suivre les changements des informations du joueur.
-  // Cet observable permet aux composants de s'abonner et de réagir aux mises à jour des informations du joueur.
-  infoJoueur$ = this.infoJoueurSubject.asObservable();
-
-  // Création d'un observable pour suivre les changements des informations du mob.
-  // Cet observable permet aux composants de s'abonner et de réagir aux mises à jour des informations du mob.
-  infoMob$ = this.infoMobSubject.asObservable();
 
   private subject = new Subject<any>();
   public btnCombatBoucle:boolean = false;
 
 
   constructor() {
-    
+    this.initJoueur()
     // this.initInfo(this.joueur,this.mob)
   }
 
-  sendJoueur(message: any) {
-    this.subject.next(message);
-    // console.log(message)
+  sendJoueur(joueur: any) {
+    this.subject.next(joueur);
+    console.log("De send",joueur)
   }
 
-  clearMessages() {
-    this.subject.next('');
+  clearJoueur() {
+    this.subject.next(null);
   }
 
   getJoueur(): Observable<any> {
     return this.subject.asObservable();
   }
 
-  reinitPersonnage(){
+  initJoueur(){
+    const l = this.localStorageService.getItemJoueur("Joueur")
+    if (l !== null) {
+      // this.joueurObs.next(l)
+      // console.log("1",this.joueur)
+      this.joueur = l;
+      // console.log("2",this.joueur)
+      this.sendJoueur(this.joueur)
+    }
+  }
 
-    this.joueur.setVieAct(this.joueur.getVieMax())
+  reinitPersonnage(joueur:Joueur){
+
+    this.joueur.setVieAct(joueur.getVieMax())
+    console.log("REINIT ",joueur)
     // this.mob.setVieAct(this.mob.getVieMax())
     this.mob = this.l_mob.getNewMob()
     // console.log("REInit Personnage : ",this.joueur,this.mob)
-    this.initInfo(this.joueur,this.mob)
+    this.initInfo(joueur,this.mob)
 
   }
 
@@ -79,7 +81,7 @@ export class CombatService {
     this.statusCombat = false;
     
     
-    // this.reinitPersonnage()
+    
  
     
   }
@@ -124,7 +126,7 @@ export class CombatService {
       vieMax: this.mob.getVieMax(),
       niveau: this.mob.getNiveau(),
     };
-    this.infoMobSubject.next(infoMob); // mise à jour infoMob
+    // this.infoMobSubject.next(infoMob); // mise à jour infoMob
     
   }
 
@@ -136,11 +138,10 @@ export class CombatService {
       vieMax: this.joueur.getVieMax(),
       niveau: this.joueur.getNiveau(),
     };
-    this.infoJoueurSubject.next(infoJoueur); // mise à jour infoJoueur
+    // this.infoJoueurSubject.next(infoJoueur); // mise à jour infoJoueur
     // this.jObs.updateJoueurMain(this.joueur)
     this.sendJoueur(this.joueur)
-    // this.setData("dddd")
-    console.log("Update",this.joueur);
+    console.log("Update",infoJoueur);
   }
 
 
@@ -351,7 +352,7 @@ export class CombatService {
   }
 
   finCombat(joueur: Joueur,mob: Mob ) {
-    this.reinitPersonnage()
+    this.reinitPersonnage(joueur)
     
     this.statusCombat = false;
     this.tourPlayerAct = "";

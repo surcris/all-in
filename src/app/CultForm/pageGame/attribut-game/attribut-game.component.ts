@@ -13,18 +13,20 @@ import { CombatService } from '../../../services/game/combat.service';
   styleUrl: './attribut-game.component.scss'
 })
 export class AttributGameComponent implements OnInit, OnDestroy {
-  @Input() joueurObs:Joueur | null = null;
+  joueurObs:Joueur | null = null;
   @Input() ds:any | null = null;
   private joueurSubscription: Subscription | null = null;
   data: string | any = "";
 
-  private l_Combat: CombatService = new CombatService;
+  // private l_Combat: CombatService = new CombatService;
 
   joueur: any[] = [];
   subscription: Subscription | any = null;
 
   constructor(private gameComponent: GameComponent,private cb: CombatService) {
-    
+    this.cb = new CombatService();
+    this.joueurObs = this.cb.joueur
+    // console.log("Attribut",this.cb.joueur)
   }
 
   
@@ -33,7 +35,7 @@ export class AttributGameComponent implements OnInit, OnDestroy {
    
     this.subscription = this.cb.getJoueur().subscribe(joueur => {
       if (joueur) {
-        console.log(joueur)
+        console.log('Attribut',joueur)
         this.joueurObs = joueur
         
       } else {

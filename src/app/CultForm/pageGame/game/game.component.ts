@@ -22,30 +22,23 @@ import { CombatService } from '../../../services/game/combat.service';
 })
 export class GameComponent implements OnInit{
   joueurObs = new BehaviorSubject<any>(null);
-  joueur = this.joueurObs.asObservable();
-  private lsj = new LocalStorageGameService();
-
-  constructor(private l_Combat: CombatService) {
+  // joueur = this.joueurObs.asObservable();
+  j:Joueur | null =null
+  // private lsj = new LocalStorageGameService();
+  // private l_Combat: CombatService = new CombatService();
+  constructor() {
     
   }
 
   ngOnInit() {
-    this.initJoueur();
+    // this.initJoueur();
+    // this.l_Combat.sendJoueur(this.j)
+    // console.log(this.j)
   }
 
 
   initJoueur(){
-    const l = this.lsj.getItemJoueur("Joueur")
-    if (l !== null) {
-      // this.joueurObs.next(l)
-      this.l_Combat.sendJoueur(l)
-      console.log("EEE",l)
-    }else{
-      const j = new JoueurService().getJoueur()
-      // this.joueurObs.next(j)
-      this.l_Combat.sendJoueur(j)
-      console.log("DDD",j)
-    }
+    
   }
 
   updateJoueurMain(joueur: any) {
