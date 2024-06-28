@@ -40,26 +40,26 @@ export class JoueurService {
     return this.getJoueur().getVieAct()*100/this.getJoueur().getVieMax()
   }
 
-  getDataJoueur(data: any){
+  getDataJoueur(){
     const b = {
-      "_pseudo": data._pseudo,      // pseudo
-      "_vieMax": data._vieMax,         // vieMax
-      "_vieAct": data._vieAct,         // vieAct
-      "_niveau": data._niveau,           // niveau
-      "_eau": data._eau,          // eau
-      "_feu":data._feu,          // feu
-      "_air":data._air,          // air
-      "_terre":data._terre,          // terre
-      "_puissance":data._puissance,          // puissance
-      "_dommage":data._dommage,          // dommage
-      "_degatBrut":data._degatBrut,           // degatBrut
-      "_resEau":data._resEau,          // resEau
-      "_resFeu":data._resFeu,          // resFeu
-      "_resTerre":data._resTerre,          // resTerre
-      "_resAir":data._resAir,          // resAir
-      "_resBrut":data._resBrut,           // resBrut
-      "_energie":data._energie,           // xp
-      "_energieLvl":data._energieLvl 
+      "pseudo": this.joueur.getPseudo(),      // pseudo
+      "vieMax": this.joueur.getVieMax(),         // vieMax
+      "vieAct": this.joueur.getVieAct(),         // vieAct
+      "niveau": this.joueur.getNiveau(),           // niveau
+      "eau": this.joueur.getEau(),          // eau
+      "feu":this.joueur.getFeu(),          // feu
+      "air":this.joueur.getAir(),          // air
+      "_terre":this.joueur.getTerre(),          // terre
+      "puissance":this.joueur.getPuissance(),          // puissance
+      "dommage":this.joueur.getDommage(),          // dommage
+      "degatBrut":this.joueur.getDegatBrut(),           // degatBrut
+      "resEau":this.joueur.getResEau(),          // resEau
+      "resFeu":this.joueur.getResFeu(),          // resFeu
+      "resTerre":this.joueur.getResTerre(),          // resTerre
+      "resAir":this.joueur.getResAir(),          // resAir
+      "resBrut":this.joueur.getResBrut(),           // resBrut
+      "energie":this.joueur.getEnergie(),           // energie
+      "energieLvl":this.joueur.getEnergieLvl()    // energielvl
     }
     return b
      

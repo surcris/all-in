@@ -30,18 +30,18 @@ export class CombatService {
   private statusCombat:boolean = false;
   private nbrTour:number = 0;
 
-  private subject = new Subject<any>();
+  private subject = new BehaviorSubject<any>(null);
   public btnCombatBoucle:boolean = false;
 
 
   constructor() {
-    this.initJoueur()
+    // this.initJoueur()
     // this.initInfo(this.joueur,this.mob)
   }
 
-  sendJoueur(joueur: any) {
-    this.subject.next(joueur);
-    console.log("De send",joueur)
+  partagerJoueur() {
+    this.subject.next(this.l_perso.getDataJoueur());
+    console.log("De partagerJoueur",this.l_perso.getDataJoueur())
   }
 
   clearJoueur() {
@@ -52,16 +52,24 @@ export class CombatService {
     return this.subject.asObservable();
   }
 
+  initialisationCombat(){
+    this.initJoueur();
+    this.initParametreCombat();
+
+    // this.partagerJoueur();
+  }
+
   initJoueur(){
     const l = this.localStorageService.getItemJoueur("Joueur")
     if (l !== null) {
-      // this.joueurObs.next(l)
-      // console.log("1",this.joueur)
       this.joueur = l;
-      // console.log("2",this.joueur)
-      this.sendJoueur(this.joueur)
+      this.partagerJoueur()
+    }else{
+      this.partagerJoueur()
     }
   }
+  
+
 
   reinitPersonnage(joueur:Joueur){
 
@@ -74,15 +82,12 @@ export class CombatService {
 
   }
 
-  initCombat(){
+  initParametreCombat(){
     // this.startTour(); // commence le compte a rebour du tour
     this.joueurAJoue = false;
     this.tourPlayerAct = 'joueur';
     this.statusCombat = false;
     
-    
-    
- 
     
   }
 
@@ -140,7 +145,7 @@ export class CombatService {
     };
     // this.infoJoueurSubject.next(infoJoueur); // mise à jour infoJoueur
     // this.jObs.updateJoueurMain(this.joueur)
-    this.sendJoueur(this.joueur)
+    this.partagerJoueur()
     console.log("Update",infoJoueur);
   }
 

@@ -21,9 +21,9 @@ export class CombatZoneComponent implements OnInit {
   private l_perso: JoueurService = new JoueurService;
   // private l_Combat: CombatService = new CombatService;
 
-  private gameMain: GameComponent = new GameComponent();
+  // private gameMain: GameComponent = new GameComponent(this.l_Combat);
 
-  private joueur = new GameComponent();
+  // private joueur = new GameComponent();
   public mob = this.l_Combat.getMobService();
 
 
@@ -63,22 +63,11 @@ export class CombatZoneComponent implements OnInit {
       console.log('pas trouver')
     }
 
-    // S'abonner aux changements des informations du joueur
-    // this.l_Combat.infoJoueur$.subscribe(infoJoueur => {
-    //   this.infoJoueur = infoJoueur;
-    // });
-    // // S'abonner aux changements des informations du mob
-    // this.l_Combat.infoMob$.subscribe(infoMob => {
-    //   this.infoMob = infoMob;
-    // });
-
-
-    this.l_Combat.initCombat()
-    if (this.gameMain.j instanceof Joueur ) {
-      this.l_Combat.reinitPersonnage(this.gameMain.j);
-    }
-    
-    this.startCombat()
+    this.l_Combat.getJoueur().subscribe(joueur => {
+      this.infoJoueur = joueur;
+      // Object.assign(this.joueurObs, joueur);
+      console.log("attcc", this.infoJoueur)
+    });
     
   }
 
@@ -86,7 +75,7 @@ export class CombatZoneComponent implements OnInit {
     // this.l_Combat.clicK()
     const air = this.l_perso.sortAir(this.mob.getResAir(),this.mob.getResBrut())
     this.l_Combat.tourJoueur(air)
-    this.l_Combat.sendJoueur(this.joueur)
+    // this.l_Combat.partagerJoueur()
     // console.log(air)
   }
 
@@ -139,7 +128,7 @@ export class CombatZoneComponent implements OnInit {
     // this.l_Combat.sendMessage(this.joueur)
     
 
-    console.log(r, this.joueur)
+    // console.log(r, this.joueur)
   }
   
   

@@ -1,45 +1,55 @@
-<!-- <div class="combat-zone"> -->
-    <div class="Perso">
-        <div class="Perso-container">
-            <div class="Perso-img">
-                <div class="Perso-lvl">
-                    <h3>{{this.infoJoueur.pseudo}}</h3>
-                    <p>Niveau {{this.infoJoueur.niveau}}</p>
-                </div>
-            </div>
-            
-            <div class="Perso-vie">
-                <p>{{this.infoJoueur.vieAct}}/{{this.infoJoueur.vieMax}}</p>
-                <div class="Perso-barre"></div>
+<div class="Perso">
+    <div class="Perso-container">
+        <div class="Perso-img">
+            <div class="Perso-lvl">
+                <h3>{{this.infoJoueur.pseudo}}</h3>
+                <p>Niveau {{this.infoJoueur.niveau}}</p>
             </div>
         </div>
-        <div class="Perso-skill-container">
-            <ul>
-                <li><div id="btn-1" (click)="skillCase1()">skill1</div></li>
-                <li><div id="btn-2" (click)="skillCase2()">skill2</div></li>
-                <li><div id="btn-3" (click)="skillCase3()">skill3</div></li>
-                <li><div id="btn-4" (click)="skillCase4()">skill4</div></li>
-                <li><div (click)="btnBoucle()">Boucle</div></li>
-                <li></li>
-                <li></li>
-                <li><div id="get" (click)="getInfoJoueur()">Get</div></li>
-            </ul>
+
+        <div class="Perso-vie">
+            <p>{{this.infoJoueur.vieAct}}/{{this.infoJoueur.vieMax}}</p>
+            <div class="Perso-barre"></div>
         </div>
     </div>
-    <div class="Enemy">
-        <div class="Enemy-container">
-            <div class="Enemy-img">
-                <div class="Enemy-lvl">
-                    <h3>{{this.infoMob.nom}}</h3>
-                    <p>Niveau {{this.infoMob.niveau}}</p>
-                </div>
-                
-            </div>
-            <div class="Enemy-vie">
-                <p>{{this.infoMob.vieAct}}/{{this.infoMob.vieMax}}</p>
-                <div class="Enemy-barre"></div>
-            </div>
-        </div>
-        
+    <div class="Perso-skill-container">
+        <ul>
+            <li>
+                <div id="btn-1" (click)="skillCase1()">skill1</div>
+            </li>
+            <li>
+                <div id="btn-2" (click)="skillCase2()">skill2</div>
+            </li>
+            <li>
+                <div id="btn-3" (click)="skillCase3()">skill3</div>
+            </li>
+            <li>
+                <div id="btn-4" (click)="skillCase4()">skill4</div>
+            </li>
+            <li>
+                <div (click)="btnBoucle()">Boucle</div>
+            </li>
+            <li></li>
+            <li></li>
+            <li>
+                <div id="get" (click)="getInfoJoueur()">Get</div>
+            </li>
+        </ul>
     </div>
-<!-- </div> -->
+</div>
+<div class="Enemy">
+    <div class="Enemy-container">
+        <div class="Enemy-img">
+            <div class="Enemy-lvl">
+                <h3>{{this.infoMob.nom}}</h3>
+                <p>Niveau {{this.infoMob.niveau}}</p>
+            </div>
+
+        </div>
+        <div class="Enemy-vie">
+            <p>{{this.infoMob.vieAct}}/{{this.infoMob.vieMax}}</p>
+            <div class="Enemy-barre"></div>
+        </div>
+    </div>
+
+</div>

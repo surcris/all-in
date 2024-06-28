@@ -4,6 +4,7 @@ import { Joueur } from '../../../model/joueur.model';
 import { JoueurService } from '../../../services/game/joueur.service';
 import { Subscription } from 'rxjs';
 import { CombatService } from '../../../services/game/combat.service';
+import { object } from '@angular/fire/database';
 
 @Component({
   selector: 'app-attribut-game',
@@ -13,35 +14,22 @@ import { CombatService } from '../../../services/game/combat.service';
   styleUrl: './attribut-game.component.scss'
 })
 export class AttributGameComponent implements OnInit, OnDestroy {
-  joueurObs:Joueur | null = null;
-  @Input() ds:any | null = null;
-  private joueurSubscription: Subscription | null = null;
-  data: string | any = "";
+ 
 
-  // private l_Combat: CombatService = new CombatService;
-
-  joueur: any[] = [];
+  joueurObs: any = null;
   subscription: Subscription | any = null;
 
-  constructor(private gameComponent: GameComponent,private cb: CombatService) {
-    this.cb = new CombatService();
-    this.joueurObs = this.cb.joueur
-    // console.log("Attribut",this.cb.joueur)
+  constructor(private combatService: CombatService) {
+    
   }
 
   
   ngOnInit(): void {
-
-   
-    this.subscription = this.cb.getJoueur().subscribe(joueur => {
-      if (joueur) {
-        console.log('Attribut',joueur)
-        this.joueurObs = joueur
-        
-      } else {
-        // clear messages when empty message received
-        this.joueur = [];
-      }
+    
+    this.combatService.getJoueur().subscribe(joueur => {
+      this.joueurObs = joueur;
+      // Object.assign(this.joueurObs, joueur);
+      console.log("attcc", this.joueurObs)
     });
 
     
@@ -50,9 +38,9 @@ export class AttributGameComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.joueurSubscription) {
-      this.joueurSubscription.unsubscribe();
-    }
+    // if (this.joueurSubscription) {
+    //   this.joueurSubscription.unsubscribe();
+    // }
   }
 
   // ngOnChanges(changes: SimpleChanges): void {
