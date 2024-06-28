@@ -40,8 +40,8 @@ export class CombatService {
   }
 
   partagerJoueur() {
-    this.subject.next(this.l_perso.getDataJoueur());
-    console.log("De partagerJoueur",this.l_perso.getDataJoueur())
+    this.subject.next(this.joueur);
+    // console.log("De partagerJoueur",this.joueur)
   }
 
   clearJoueur() {
@@ -54,6 +54,7 @@ export class CombatService {
 
   initialisationCombat(){
     this.initJoueur();
+
     this.initParametreCombat();
 
     // this.partagerJoueur();
@@ -64,21 +65,23 @@ export class CombatService {
     if (l !== null) {
       this.joueur = l;
       this.partagerJoueur()
+      console.log("donnée Joueur importé du localStrorage")
     }else{
       this.partagerJoueur()
+      console.log("donnée Joueur non importé")
     }
   }
   
 
 
-  reinitPersonnage(joueur:Joueur){
+  reinitPlayers(){
 
-    this.joueur.setVieAct(joueur.getVieMax())
-    console.log("REINIT ",joueur)
+    this.joueur.setVieAct(this.joueur.getVieMax())
+    console.log("REINIT ",this.joueur)
     // this.mob.setVieAct(this.mob.getVieMax())
     this.mob = this.l_mob.getNewMob()
     // console.log("REInit Personnage : ",this.joueur,this.mob)
-    this.initInfo(joueur,this.mob)
+    // this.initInfo(this.joueur,this.mob)
 
   }
 
@@ -101,8 +104,8 @@ export class CombatService {
   initInfo(joueur: Joueur, mob: Mob) {
     // console.log("Init Info : ",this.joueur,this.mob)
     // Initialiser les Players 
-    this.updateInfoJoueur(joueur)
-    this.updateInfoMob(mob)
+    this.updateInfoJoueur()
+    this.updateInfoMob()
   }
 
 
@@ -121,32 +124,32 @@ export class CombatService {
     }
   }
 
-  updateInfoMob(mob: Mob) {
+  updateInfoMob() {
     // console.log("Dans update Mob",mob);
-    this.mob = mob;
+    this.mob = this.l_mob.getNewMob();
     // console.log("Dans update Mob Parti 2 :",this.mob);
-    const infoMob = {
-      nom: this.mob.getNom(),
-      vieAct: this.mob.getVieAct(),
-      vieMax: this.mob.getVieMax(),
-      niveau: this.mob.getNiveau(),
-    };
+    // const infoMob = {
+    //   nom: this.mob.getNom(),
+    //   vieAct: this.mob.getVieAct(),
+    //   vieMax: this.mob.getVieMax(),
+    //   niveau: this.mob.getNiveau(),
+    // };
     // this.infoMobSubject.next(infoMob); // mise à jour infoMob
     
   }
 
-  updateInfoJoueur(joueur: Joueur) {
-    this.joueur = joueur;
-    const infoJoueur = {
-      pseudo: this.joueur.getPseudo(),
-      vieAct: this.joueur.getVieAct(),
-      vieMax: this.joueur.getVieMax(),
-      niveau: this.joueur.getNiveau(),
-    };
+  updateInfoJoueur() {
+    // this.joueur ;
+    // const infoJoueur = {
+    //   pseudo: this.joueur.getPseudo(),
+    //   vieAct: this.joueur.getVieAct(),
+    //   vieMax: this.joueur.getVieMax(),
+    //   niveau: this.joueur.getNiveau(),
+    // };
     // this.infoJoueurSubject.next(infoJoueur); // mise à jour infoJoueur
     // this.jObs.updateJoueurMain(this.joueur)
     this.partagerJoueur()
-    console.log("Update",infoJoueur);
+    console.log("Update",this.joueur);
   }
 
 
@@ -322,7 +325,7 @@ export class CombatService {
         // console.log("Tour Joueur : " ,this.mob)
         // Mettez à jour les informations du mob
         this.tourPlayerAct="mob";
-        this.updateInfoMob(this.mob); // À implémenter dans le composant
+        // this.updateInfoMob(); // À implémenter dans le composant
         this.joueurAJoue = true;
       }
     }
@@ -336,9 +339,10 @@ export class CombatService {
         // console.log('Dégâts du Mob', McJ);
         if (typeof McJ !== "undefined") {
           this.joueur.setVieAct(this.joueur.getVieAct() - McJ);
-
+          this.partagerJoueur()
+          console.log(this.joueur.getVieAct())
           // Mettez à jour les informations du joueur
-          this.updateInfoJoueur(this.joueur); // À implémenter dans le composant
+          // this.updateInfoJoueur(this.joueur); // À implémenter dans le composant
           this.joueurAJoue = true;
         }
       
@@ -346,7 +350,8 @@ export class CombatService {
   }
 
   saveInfoJoueur(){
-    this.updateInfoJoueur(this.joueur)
+    this.updateInfoJoueur()
+    this.updateInfoMob()
     this.localStorageService.setItem("Joueur",this.joueur)
     console.log("info sauvegarder")
   }
@@ -357,7 +362,7 @@ export class CombatService {
   }
 
   finCombat(joueur: Joueur,mob: Mob ) {
-    this.reinitPersonnage(joueur)
+    this.reinitPlayers()
     
     this.statusCombat = false;
     this.tourPlayerAct = "";
@@ -439,11 +444,12 @@ export class CombatService {
       this.finCombat(this.joueur, this.mob);
       // return
       if (this.btnCombatBoucle ) {
-
+        console.log("Fin du combat info reinitialiser pour un nouveau combat.")
         await this.cbtTbT()
 
       } else {
         this.tourPlayerAct="";
+        console.log("Fin du combat")
         return
       }
       

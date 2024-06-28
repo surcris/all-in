@@ -63,12 +63,18 @@ export class CombatZoneComponent implements OnInit {
       console.log('pas trouver')
     }
 
+    this.initPlayers()
+    this.l_Combat.cbtTbT()
+    
+  }
+
+  initPlayers(){
     this.l_Combat.getJoueur().subscribe(joueur => {
       this.infoJoueur = joueur;
+      this.infoMob = this.l_Combat.mob
       // Object.assign(this.joueurObs, joueur);
-      console.log("attcc", this.infoJoueur)
+      // console.log("info combat init", this.infoMob, this.infoJoueur)
     });
-    
   }
 
   skillCase1(){
@@ -111,24 +117,11 @@ export class CombatZoneComponent implements OnInit {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-  // saveInfoJoueur(){
-  //   this.localStorageService.setItem("Joueur",this.joueur)
-  //   console.log("info sauvegarder")
-  // }
 
   getInfoJoueur(){
     const r = this.localStorageService.getItemJoueur("Joueur")
     
-    // assigner les donner du localstorage a joueur 
-    // if (typeof r !== 'string') {
-      // Object.assign(this.joueur, r);
-    // }else {
-    // console.log("infojoueur sauvegarder erreur")
-    //}
-    // this.l_Combat.sendMessage(this.joueur)
     
-
-    // console.log(r, this.joueur)
   }
   
   

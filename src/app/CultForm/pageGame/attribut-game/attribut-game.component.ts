@@ -29,7 +29,7 @@ export class AttributGameComponent implements OnInit, OnDestroy {
     this.combatService.getJoueur().subscribe(joueur => {
       this.joueurObs = joueur;
       // Object.assign(this.joueurObs, joueur);
-      console.log("attcc", this.joueurObs)
+      // console.log("Attribut game init ", this.joueurObs)
     });
 
     

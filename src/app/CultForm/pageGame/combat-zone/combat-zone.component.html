@@ -2,13 +2,13 @@
     <div class="Perso-container">
         <div class="Perso-img">
             <div class="Perso-lvl">
-                <h3>{{this.infoJoueur.pseudo}}</h3>
-                <p>Niveau {{this.infoJoueur.niveau}}</p>
+                <h3>{{this.infoJoueur.getPseudo()}}</h3>
+                <p>Niveau {{this.infoJoueur.getNiveau()}}</p>
             </div>
         </div>
 
         <div class="Perso-vie">
-            <p>{{this.infoJoueur.vieAct}}/{{this.infoJoueur.vieMax}}</p>
+            <p>{{this.infoJoueur.getVieAct()}}/{{this.infoJoueur.getVieMax()}}</p>
             <div class="Perso-barre"></div>
         </div>
     </div>
@@ -41,13 +41,13 @@
     <div class="Enemy-container">
         <div class="Enemy-img">
             <div class="Enemy-lvl">
-                <h3>{{this.infoMob.nom}}</h3>
-                <p>Niveau {{this.infoMob.niveau}}</p>
+                <h3>{{this.infoMob.getNom()}}</h3>
+                <p>Niveau {{this.infoMob.getNiveau()}}</p>
             </div>
 
         </div>
         <div class="Enemy-vie">
-            <p>{{this.infoMob.vieAct}}/{{this.infoMob.vieMax}}</p>
+            <p>{{this.infoMob.getVieAct()}}/{{this.infoMob.getVieMax()}}</p>
             <div class="Enemy-barre"></div>
         </div>
     </div>
