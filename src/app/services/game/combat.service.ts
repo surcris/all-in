@@ -19,7 +19,7 @@ export class CombatService {
   private l_mob: MobService = new MobService;
   private l_perso: JoueurService = new JoueurService;
 
-  joueur:Joueur = this.l_perso.getJoueur();
+  public joueur:Joueur = this.l_perso.getJoueur();
   public mob:Mob = this.l_mob.getMob();
 
   private compteR: number = 10;

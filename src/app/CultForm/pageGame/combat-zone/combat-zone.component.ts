@@ -6,6 +6,7 @@ import { LocalStorageGameService } from '../../../services/game/local-storage-ga
 import { Subscription } from 'rxjs';
 import { GameComponent } from '../game/game.component';
 import { Joueur } from '../../../model/joueur.model';
+import { Mob } from '../../../model/mob.model';
 GameComponent
 
 @Component({
@@ -36,15 +37,14 @@ export class CombatZoneComponent implements OnInit {
   jNom: string | undefined;
   jNiveau: number | undefined;
 
-  infoJoueur:any;
-  infoMob:any;
+  infoJoueur:Joueur | undefined;
+  infoMob:Mob | undefined;
 
 
 
   constructor(private renderer: Renderer2, private el: ElementRef, private l_Combat: CombatService) {
 
     
-   
   }
 
 
@@ -62,7 +62,7 @@ export class CombatZoneComponent implements OnInit {
     } else {
       console.log('pas trouver')
     }
-
+    this.infoJoueur = this.l_Combat.joueur;
     this.initPlayers()
     this.l_Combat.cbtTbT()
     
@@ -70,9 +70,11 @@ export class CombatZoneComponent implements OnInit {
 
   initPlayers(){
     this.l_Combat.getJoueur().subscribe(joueur => {
-      this.infoJoueur = joueur;
+      this.infoJoueur = this.l_Combat.joueur;
       this.infoMob = this.l_Combat.mob
+      
       // Object.assign(this.joueurObs, joueur);
+      // console.log("info combat init",this.infoJoueur)
       // console.log("info combat init", this.infoMob, this.infoJoueur)
     });
   }

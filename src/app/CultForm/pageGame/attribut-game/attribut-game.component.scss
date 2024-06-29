@@ -1,11 +1,12 @@
 .attribut-container{
     width: 100%;
-    // max-height: 100%;
+    height: 100%;
+    overflow: hidden;
     .attribut-perso{
         
         width: 100%;
         padding:  10px 5px;
-        height: max-content;
+        height: 120px;
         display: flex;
         flex-direction: row;
         gap: 20px;
@@ -22,7 +23,7 @@
     .at-container{
         overflow-y: scroll;
         
-        max-height: 400px;
+        height: calc(100% - 120px);
 
         
     }
