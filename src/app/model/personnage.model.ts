@@ -1,65 +1,167 @@
-export interface Personnage {
-  // Vie
-  getVieMax(): number;
-  setVieMax(value: number): void;
+export abstract class Personnage {
 
-  getVieAct(): number;
-  setVieAct(value: number): void;
+  protected vieMax!: number;
+  protected vieAct!: number;
 
-  // Niveau
-  getNiveau(): number;
-  setNiveau(value: number): void;
+  // protected nom!: string;
 
-  // Éléments
-  getEau(): number;
-  setEau(value: number): void;
+  protected eau!: number;
+  protected feu!: number;
+  protected air!: number;
+  protected terre!: number;
+  protected puissance!: number;
+  protected dommage!: number;
+  protected degatBrut!: number;
+  protected resEau!: number;
+  protected resFeu!: number;
+  protected resTerre!: number;
+  protected resAir!: number;
+  protected resBrut!: number;
 
-  getFeu(): number;
-  setFeu(value: number): void;
+  protected niveau!: number;
 
-  getAir(): number;
-  setAir(value: number): void;
+  protected domaine?: string;
+  protected niveauDomaineRang?: number;
 
-  getTerre(): number;
-  setTerre(value: number): void;
 
-  // Statistiques de combat
-  getPuissance(): number;
-  setPuissance(value: number): void;
+  // Implémentation des getters et setters
+  getVieMax(): number {
+    return this.vieMax;
+  }
+  setVieMax(value: number): void {
+    this.vieMax = value;
+  }
 
-  getDommage(): number;
-  setDommage(value: number): void;
+  getVieAct(): number {
+    return this.vieAct;
+  }
+  setVieAct(value: number): void {
+    // console.log("valeur Mob : ", value);
+    if (value < 0) {
 
-  getDegatBrut(): number;
-  setDegatBrut(value: number): void;
+      this.vieAct = 0;
+    } else if (value > this.getVieMax()) {
 
-  // Résistances
-  getResEau(): number;
-  setResEau(value: number): void;
+      this.vieAct = this.getVieMax();
+    } else {
 
-  getResFeu(): number;
-  setResFeu(value: number): void;
+      this.vieAct = value;
+    }
 
-  getResTerre(): number;
-  setResTerre(value: number): void;
+  }
 
-  getResAir(): number;
-  setResAir(value: number): void;
+  getNiveau(): number {
+    return this.niveau;
+  }
+  setNiveau(value: number): void {
+    this.niveau = value;
+  }
 
-  getResBrut(): number;
-  setResBrut(value: number): void;
+  getEau(): number {
+    return this.eau;
+  }
+  setEau(value: number): void {
+    this.eau = value;
+  }
 
-  // Expérience
-  // getXp(): number;
-  // setXp(value: number): void;
+  getFeu(): number {
+    return this.feu;
+  }
+  setFeu(value: number): void {
+    this.feu = value;
+  }
 
-  // getExpLvl(): number;
-  // setExpLvl(value: number): void;
+  getAir(): number {
+    return this.air;
+  }
+  setAir(value: number): void {
+    this.air = value;
+  }
 
-  // Domaine
-  getDomaine(): string | undefined;
-  setDomaine(value: string | undefined): void;
+  getTerre(): number {
+    return this.terre;
+  }
+  setTerre(value: number): void {
+    this.terre = value;
+  }
 
-  getNiveauDomaineRang(): number | undefined;
-  setNiveauDomaineRang(value: number | undefined): void;
+  getPuissance(): number {
+    return this.puissance;
+  }
+  setPuissance(value: number): void {
+    this.puissance = value;
+  }
+
+  getDommage(): number {
+    return this.dommage;
+  }
+  setDommage(value: number): void {
+    this.dommage = value;
+  }
+
+  getDegatBrut(): number {
+    return this.degatBrut;
+  }
+  setDegatBrut(value: number): void {
+    this.degatBrut = value;
+  }
+
+  getResEau(): number {
+    return this.resEau;
+  }
+  setResEau(value: number): void {
+    this.resEau = value;
+  }
+
+  getResFeu(): number {
+    return this.resFeu;
+  }
+  setResFeu(value: number): void {
+    this.resFeu = value;
+  }
+
+  getResTerre(): number {
+    return this.resTerre;
+  }
+  setResTerre(value: number): void {
+    this.resTerre = value;
+  }
+
+  getResAir(): number {
+    return this.resAir;
+  }
+  setResAir(value: number): void {
+    this.resAir = value;
+  }
+
+  getResBrut(): number {
+    return this.resBrut;
+  }
+  setResBrut(value: number): void {
+    this.resBrut = value;
+  }
+
+
+
+  getDomaine(): string | undefined {
+    return this.domaine;
+  }
+  setDomaine(value: string | undefined): void {
+    this.domaine = value;
+  }
+
+  getNiveauDomaineRang(): number | undefined {
+    return this.niveauDomaineRang;
+  }
+  setNiveauDomaineRang(value: number | undefined): void {
+    this.niveauDomaineRang = value;
+  }
+  
+
+  getPourcentVie(): number {
+    return this.getVieAct() * 100 / this.getVieMax()
+  }
+
+  // abstract build(): any
+
 }

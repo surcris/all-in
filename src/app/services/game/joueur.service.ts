@@ -6,30 +6,11 @@ import { Joueur } from '../../model/joueur.model';
   providedIn: 'root'
 })
 export class JoueurService {
-  private joueur: Joueur;
+  private joueur!: Joueur;
 
   
   constructor() {
-    this.joueur = new Joueur(
-      'Hero',      // pseudo
-      100,         // vieMax
-      100,         // vieAct
-      1,           // niveau
-      10,          // eau
-      10,          // feu
-      10,          // air
-      10,          // terre
-      50,          // puissance
-      20,          // dommage
-      5,           // degatBrut
-      10,          // resEau
-      10,          // resFeu
-      10,          // resTerre
-      10,          // resAir
-      5,           // resBrut
-      0,           // xp
-      100          // expLvl
-    );
+   
   }
 
   getJoueur(): Joueur {
@@ -37,11 +18,11 @@ export class JoueurService {
   }
 
   getPourcentVie(): number {
-    return this.getJoueur().getVieAct()*100/this.getJoueur().getVieMax()
+    return this.joueur.getPourcentVie()
   }
 
-  getDataJoueur(){
-    const b = {
+  getDataJoueur(): object{
+    const objJoueur = {
       "pseudo": this.joueur.getPseudo(),      // pseudo
       "vieMax": this.joueur.getVieMax(),         // vieMax
       "vieAct": this.joueur.getVieAct(),         // vieAct
@@ -49,7 +30,7 @@ export class JoueurService {
       "eau": this.joueur.getEau(),          // eau
       "feu":this.joueur.getFeu(),          // feu
       "air":this.joueur.getAir(),          // air
-      "_terre":this.joueur.getTerre(),          // terre
+      "terre":this.joueur.getTerre(),          // terre
       "puissance":this.joueur.getPuissance(),          // puissance
       "dommage":this.joueur.getDommage(),          // dommage
       "degatBrut":this.joueur.getDegatBrut(),           // degatBrut
@@ -61,35 +42,60 @@ export class JoueurService {
       "energie":this.joueur.getEnergie(),           // energie
       "energieLvl":this.joueur.getEnergieLvl()    // energielvl
     }
-    return b
+    return objJoueur
      
     
   }
 
-  setJoueur(data: any){
+  buildJoueur():Joueur{
+      
+      this.joueur.setPseudo("Hero"),      // pseudo
+      this.joueur.setVieMax(1000),         // vieMax
+      this.joueur.setVieAct(1000),         // vieAct
+      this.joueur.setNiveau(1),           // niveau
+      this.joueur.setEau(10),          // eau
+      this.joueur.setFeu(10),          // feu
+      this.joueur.setAir(10),          // air
+      this.joueur.setTerre(10),          // terre
+      this.joueur.setPuissance(10),          // puissance
+      this.joueur.setDommage(10),          // dommage
+      this.joueur.setDegatBrut(10),           // degatBrut
+      this.joueur.setResEau(10),          // resEau
+      this.joueur.setResFeu(10),          // resFeu
+      this.joueur.setResTerre(10),          // resTerre
+      this.joueur.setResAir(10),          // resAir
+      this.joueur.setResBrut(10),           // resBrut
+      this.joueur.setEnergie(0),           // energie
+      this.joueur.setEnergieLvl(10000)          // energieLvl
+ 
+    return this.joueur;
+  }
 
-    const joueur = new Joueur(
-      data._pseudo,      // pseudo
-      data._vieMax,         // vieMax
-      data._vieAct,         // vieAct
-      data._niveau,           // niveau
-      data._eau,          // eau
-      data._feu,          // feu
-      data._air,          // air
-      data._terre,          // terre
-      data._puissance,          // puissance
-      data._dommage,          // dommage
-      data._degatBrut,           // degatBrut
-      data._resEau,          // resEau
-      data._resFeu,          // resFeu
-      data._resTerre,          // resTerre
-      data._resAir,          // resAir
-      data._resBrut,           // resBrut
-      data._energie,           // xp
-      data._energieLvl          // expLvl
-    );
+  setJoueur(data: any): void{
+
+    // const joueur = new Joueur(
+      
+      this.joueur.setPseudo(data.pseudo),      // pseudo
+      this.joueur.setVieMax(data.vieMax),         // vieMax
+      this.joueur.setVieAct(data.vieAct),         // vieAct
+      this.joueur.setNiveau(data.niveau),           // niveau
+      this.joueur.setEau(data.eau),          // eau
+      this.joueur.setFeu(data.feu),          // feu
+      this.joueur.setAir(data.air),          // air
+      this.joueur.setTerre(data.terre),          // terre
+      this.joueur.setPuissance(data.puissance),          // puissance
+      this.joueur.setDommage(data.dommage),          // dommage
+      this.joueur.setDegatBrut(data.degatBrut),           // degatBrut
+      this.joueur.setResEau(data.resEau),          // resEau
+      this.joueur.setResFeu(data.resFeu),          // resFeu
+      this.joueur.setResTerre(data.resTerre),          // resTerre
+      this.joueur.setResAir(data.resAir),          // resAir
+      this.joueur.setResBrut(data.resBrut),           // resBrut
+      this.joueur.setEnergie(data.energie),           // xp
+      this.joueur.setEnergieLvl(data.energieLvl)          // expLvl
+    // );
     
-    return joueur;
+    // return this.joueur;
   }
 
   calculerDegats(
@@ -121,6 +127,7 @@ export class JoueurService {
     
     return this.calculerDegats(this.getJoueur().getDommage(),this.getJoueur().getPuissance(),this.getJoueur().getEau()+10,resistanceElementaire,resBrut)
   }
+
   sortFeu(
     resistanceElementaire: number,
     resBrut: number
@@ -128,6 +135,7 @@ export class JoueurService {
     
     return this.calculerDegats(this.getJoueur().getDommage(),this.getJoueur().getPuissance(),this.getJoueur().getFeu()+10,resistanceElementaire,resBrut)
   }
+
   sortTerre(
     resistanceElementaire: number,
     resBrut: number
@@ -135,4 +143,5 @@ export class JoueurService {
     
     return this.calculerDegats(this.getJoueur().getDommage(),this.getJoueur().getPuissance(),this.getJoueur().getTerre()+10,resistanceElementaire,resBrut)
   }
+  
 }

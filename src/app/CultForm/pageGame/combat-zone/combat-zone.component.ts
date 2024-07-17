@@ -27,9 +27,8 @@ export class CombatZoneComponent implements OnInit {
   // private joueur = new GameComponent();
   public mob = this.l_Combat.getMobService();
 
-
-  myWidthEnemy: number = this.l_mob.getPourcentVie();
-  myWidthPerso: number = this.l_perso.getPourcentVie();
+  // myWidthPerso:number = 0;
+  // myWidthEnemy:number = 0; 
 
   enemyBarre: any;
   persoBarre: any;
@@ -50,22 +49,46 @@ export class CombatZoneComponent implements OnInit {
 
 
   ngOnInit() {
-
+    this.initPlayers()
+    // this.myWidthEnemy= this.l_Combat..getPourcentVie();
     // this.l_Combat.initInfo(this.joueur,this.mob)
+    
+    // if (this.infoJoueur && this.infoMob !== undefined) {
+    //   this.myWidthEnemy = this.l_Combat.getPourcentVieJoueur();
+    //   this.myWidthPerso = this.l_Combat.getPourcentVieMob();
+    // }
+    
+
     this.enemyBarre = this.el.nativeElement.querySelector('.Enemy-barre');
     this.persoBarre = this.el.nativeElement.querySelector('.Perso-barre');
 
     if (this.enemyBarre && this.persoBarre) {
       // console.log(this.perso.getJoueur().getAir())
-      this.renderer.setStyle(this.enemyBarre, 'width', `${this.myWidthEnemy * 1}%`);
-      this.renderer.setStyle(this.persoBarre, 'width', `${this.myWidthPerso}%`);
+      const pourcentVieMob = this.l_Combat.getPourcentVieMob();
+      this.renderer.setStyle(this.enemyBarre, 'width', `${pourcentVieMob}%`);
+      // console.log(this.myWidthEnemy)
+      const pourcentVieJoueur = this.l_Combat.getPourcentVieJoueur();
+      this.renderer.setStyle(this.persoBarre, 'width', `${pourcentVieJoueur}%`);
+      // console.log(this.myWidthPerso)
     } else {
       console.log('pas trouver')
     }
-    this.infoJoueur = this.l_Combat.joueur;
-    this.initPlayers()
+    
+   
     this.l_Combat.cbtTbT()
     
+  }
+
+  ngAfterViewChecked(): void {
+    if (this.enemyBarre && this.persoBarre) {
+      // Mettre à jour la largeur de l'élément enemyBarre
+      const pourcentVieMob = this.l_Combat.getPourcentVieMob();
+      this.renderer.setStyle(this.enemyBarre, 'width', `${pourcentVieMob}%`);
+
+      // Mettre à jour la largeur de l'élément persoBarre
+      const pourcentVieJoueur = this.l_Combat.getPourcentVieJoueur();
+      this.renderer.setStyle(this.persoBarre, 'width', `${pourcentVieJoueur}%`);
+    }
   }
 
   initPlayers(){
@@ -83,6 +106,7 @@ export class CombatZoneComponent implements OnInit {
     // this.l_Combat.clicK()
     const air = this.l_perso.sortAir(this.mob.getResAir(),this.mob.getResBrut())
     this.l_Combat.tourJoueur(air)
+    
     // this.l_Combat.partagerJoueur()
     // console.log(air)
   }

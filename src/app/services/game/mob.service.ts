@@ -6,7 +6,7 @@ import {createMob} from '../../outils/mobFactory'
   providedIn: 'root'
 })
 export class MobService {
-  private mob: Mob;
+  private mob!: Mob;
 
   constructor() { 
     this.mob = createMob()

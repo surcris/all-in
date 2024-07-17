@@ -272,7 +272,7 @@ export class CombatService {
     const differenceNiveaux = joueur.getNiveau() - mob.getNiveau();
 
     // Ajustement de l'énergie en fonction de la différence de niveaux
-    let energieGagnee = 100; // Exemple de valeur de base
+    let energieGagnee = 5; // Exemple de valeur de base
 
     if (differenceNiveaux > 0) {
       // Si le joueur est d'un niveau supérieur au mob
@@ -287,10 +287,17 @@ export class CombatService {
 
   calculRecompense(joueur: Joueur, mob: Mob) {
     const eneGain = this.calculerEnergieGagnee(joueur, mob);
-    this.joueur.setEnergie(eneGain)
+    // this.joueur.getEnergie()
+    this.joueur.setEnergie(this.joueur.getEnergie()+eneGain)
     console.log('Énergie gagnée', eneGain);
   }
+  getPourcentVieJoueur(): number {
+    return this.joueur.getPourcentVie();
+  }
 
+  getPourcentVieMob(): number {
+    return this.mob.getPourcentVie();
+  }
   stopTour() {
     // console.log('Stop')
     if (this.timeoutId) {
@@ -324,6 +331,7 @@ export class CombatService {
         this.mob.setVieAct(this.mob.getVieAct() - JcM);
         // console.log("Tour Joueur : " ,this.mob)
         // Mettez à jour les informations du mob
+        console.log(this.getPourcentVieMob())
         this.tourPlayerAct="mob";
         // this.updateInfoMob(); // À implémenter dans le composant
         this.joueurAJoue = true;
@@ -331,6 +339,24 @@ export class CombatService {
     }
   }
 
+  tourJoueurBot() {
+    if (this.tourPlayerAct === "joueur") {
+      console.log("Tour : ", this.tourPlayerAct);
+      
+        const McJ = this.calculDegatsElementaire(this.joueur, this.mob, "air");
+        // console.log('Dégâts du Mob', McJ);
+        if (typeof McJ !== "undefined") {
+          this.mob.setVieAct(this.mob.getVieAct() - McJ);
+          this.partagerJoueur()
+          
+          console.log(this.getPourcentVieJoueur())
+          // Mettez à jour les informations du joueur
+          // this.updateInfoJoueur(this.joueur); // À implémenter dans le composant
+          this.joueurAJoue = true;
+        }
+      
+    }
+  }
   tourMob() {
     if (this.tourPlayerAct === "mob") {
       console.log("Tour : ", this.tourPlayerAct);
@@ -340,7 +366,8 @@ export class CombatService {
         if (typeof McJ !== "undefined") {
           this.joueur.setVieAct(this.joueur.getVieAct() - McJ);
           this.partagerJoueur()
-          console.log(this.joueur.getVieAct())
+          
+          console.log(this.getPourcentVieJoueur())
           // Mettez à jour les informations du joueur
           // this.updateInfoJoueur(this.joueur); // À implémenter dans le composant
           this.joueurAJoue = true;
@@ -407,9 +434,14 @@ export class CombatService {
       const attente = new Promise<string>((resolve) => {
         t = setTimeout(() => {
           // console.log("Joueur Temps écoulé !");
+          
+          if (!this.joueurAJoue ) {
+            this.tourJoueurBot();
+          }
           this.tourPlayerAct="mob";
+          
           resolve("Temps écoulé !"); // Résout la promesse après 10 secondes
-        }, 10000);
+        }, 5000);
       });
       await Promise.race([attente, this.attendreClicBouton()])
         .then((v) => {
@@ -438,7 +470,7 @@ export class CombatService {
     // this.tourPlayerAct = 'joueur';
     // console.log("++++++++++ Tour ",this.nbrTour," +++++++++")
     await this.attenteJ();
-    
+    this.joueurAJoue = false;
 
     if (this.joueur.getVieAct() === 0 || this.mob.getVieAct() === 0) {
       this.finCombat(this.joueur, this.mob);
@@ -460,6 +492,7 @@ export class CombatService {
 
     // setTimeout(() => {
     this.attenteM()
+    this.joueurAJoue = false
     this.tourPlayerAct="joueur";
 
     if (this.joueur.getVieAct() === 0 || this.mob.getVieAct() === 0) {
